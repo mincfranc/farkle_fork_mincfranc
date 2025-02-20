@@ -8,6 +8,14 @@ order: 0
 
 ## Overview
 
+Oh the places you'll go.
+Green eggs and ham.
+
+Bill is definitely the coolest, we need not speak on it further, for it is well known.
+
+This is David's finest note ever
+Here's David's second best note
+
 ### Farkle - Revised Proposal
 
 🎲 Farkle: The Ultimate Turn-Based Dice Game App
@@ -60,6 +68,12 @@ As a player, I want an option to play solitaire mode so that I can practice and 
 As a player, I want to see the game rules and scoring guide so that I can understand how to play.
 
 
+kitties
+
 ## Persistent data
 
+cuddles
+
 ## External services and data sources
+
+hugs
