@@ -1,0 +1,21 @@
+remote_theme: ddc-java/ddc-day-book
+
+# TODO Update title to match project name.
+title: "Capstone Starter Application"
+
+author:
+  # TODO Include team members' names (in a single line, comma-delimited) in the name property.
+  name: 
+
+repository_link:
+  enabled: false
+page_navigator:
+  enabled: true
+titles_from_headings:
+  enabled: false
+prev_next_navigation:
+  - bottom
+
+kramdown:
+  toc_levels: 2..3
+

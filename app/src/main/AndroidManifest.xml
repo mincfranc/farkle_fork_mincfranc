@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools">
+
+  <!-- TODO Update value of android:name attribute, to refer to refactored application class. -->
+  <application
+    android:allowBackup="false"
+    android:icon="@mipmap/ic_launcher"
+    android:roundIcon="@mipmap/ic_launcher_round"
+    android:label="@string/app_name"
+    android:name=".StarterApplication"
+    android:supportsRtl="true"
+    android:theme="@style/AppTheme"
+    tools:ignore="AllowBackup,DataExtractionRules">
+
+  </application>
+
+</manifest>
