@@ -8,6 +8,8 @@ order: 0
 
 ## Overview
 
+This is Nick speaking, telling you about this cool project.
+
 ## Intended users and user stories
 
 ## Persistent data
