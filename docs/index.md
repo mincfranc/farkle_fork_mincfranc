@@ -56,7 +56,7 @@ User Stories
     People who like Farkle but want to practice and get the feel of the game
         As a player, I want an option to play solitaire mode so that I can practice and improve my skills.
         As a player, I want to see the game rules and scoring guide so that I can understand how to play.
- 
+
 
 ## Intended users and user stories
 
