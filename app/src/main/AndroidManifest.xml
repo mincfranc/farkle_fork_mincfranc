@@ -2,17 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools">
 
-  <!--
-    TODO Verify that value of android:name attribute refers to refactored application class; if not,
-      update accordingly. (This may already have been done when refactoring the application class
-      name & package.)
-  -->
   <application
     android:allowBackup="false"
     android:icon="@mipmap/ic_launcher"
     android:roundIcon="@mipmap/ic_launcher_round"
     android:label="@string/app_name"
-    android:name=".StarterApplication"
+    android:name=".FarkleApplication"
     android:supportsRtl="true"
     android:theme="@style/AppTheme"
     tools:ignore="AllowBackup,DataExtractionRules">

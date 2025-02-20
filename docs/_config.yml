@@ -1,11 +1,9 @@
 remote_theme: ddc-java/ddc-day-book
 
-# TODO Update title to match project name.
-title: "Capstone Starter Application"
+title: "Farkle"
 
 author:
-  # TODO Include team members' names (in a single line, comma-delimited) in the name property.
-  name: 
+  name: David Barbour, Minerva Franco, BillTheMaker, Aaron Halbig
 
 repository_link:
   enabled: false

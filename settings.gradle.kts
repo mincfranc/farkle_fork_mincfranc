@@ -30,6 +30,5 @@ dependencyResolutionManagement {
     }
 }
 
-// TODO Set the root-project name (in lower-spinal-case) to set the artifact ID of the build.
-rootProject.name = "capstone-starter"
+rootProject.name = "farkle"
 include(":app", ":server")
