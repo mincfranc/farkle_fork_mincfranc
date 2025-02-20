@@ -4,7 +4,7 @@ subtitle: "Summary of project, intended users/stories; persistent data; external
 order: 0
 ---
 
-TODO Copy and update content from proposal to the sections below.
+[//]: # (TODO Copy and update content from proposal to the sections below.)
 
 ## Overview
 
