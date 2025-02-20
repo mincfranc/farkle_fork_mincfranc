@@ -8,7 +8,7 @@ order: 0
 
 ## Overview
 
-This is Nick speaking, telling you about this cool project.
+This is David's finest note ever
 
 ## Intended users and user stories
 
