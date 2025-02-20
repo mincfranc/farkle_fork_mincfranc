@@ -8,6 +8,8 @@ order: 0
 
 ## Overview
 
+Bill is definitely the coolest, we need not speak on it further, for it is well known.
+
 This is David's finest note ever
 Here's David's second best note
 
