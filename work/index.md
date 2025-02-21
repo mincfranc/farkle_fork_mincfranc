@@ -8,17 +8,7 @@ order: 0
 
 ## Overview
 
-Oh the places you'll go.
-Green eggs and ham.
-
-Bill is definitely the coolest, we need not speak on it further, for it is well known.
-
-This is David's finest note ever
-Here's David's second best note
-
-### Farkle - Revised Proposal
-
-🎲 Farkle: The Ultimate Turn-Based Dice Game App
+### 🎲 Farkle: The Ultimate Turn-Based Dice Game App
 
 Imagine a fast-paced, competitive dice game you can play anytime, anywhere—with friends or solo. This Farkle app brings the classic risk-and-reward gameplay to your phone, featuring asynchronous play so you can take turns at your convenience. Use round time limits to keep the game engaging, without dragging on. Challenge friends, join random matches, or play solo to sharpen your strategy. Roll, strategize, and win!
 
@@ -51,7 +41,7 @@ Random number generation for dice rolls
 Dynamic removal of scoring dice between rolls - subsequent rolls would have -the number of dice pulled, end of round would need scoring and bust condition.
 
 ### Webservice
-This game would need to have some sort of service to keep track of a game in progress, take users scores and pass the round to the next player after the previous player completes, etc
+This game has a service to keep track of a game in progress, take users scores and pass the round to the next player after the previous player completes, etc
 The core game should support some kind of solitaire mode. Despite this, a solitaire mode could be strange and repetitive, without opponents scoring, so the ability to play with others via webservice should be considered the primary goal.
 
 ## Intended users and user stories
@@ -67,13 +57,7 @@ As a player, I want to see my stats and performance history so that I can track 
 As a player, I want an option to play solitaire mode so that I can practice and improve my skills.
 As a player, I want to see the game rules and scoring guide so that I can understand how to play.
 
-
-kitties
-
 ## Persistent data
 
-cuddles
 
 ## External services and data sources
-
-hugs
