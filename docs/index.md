@@ -71,10 +71,26 @@ As a player, I want to see my stats and performance history so that I can track 
 
 ## Persistent data
 
-User account/login - to save data
-History of gameplay
-Game state
+- User Accounts: User account data, including display names, login credentials and user preferences (e.g., theme selection, notification settings).
+- Gameplay History: A record of all completed games, including game IDs, player IDs, scores, timestamps, and game outcomes (win/loss/draw).
+- Game State: For each active game, store the current game state, including the current player's turn, dice values, scored points, and frozen/banked points.
+- User Preferences: Individual user settings, such as preferred notification types (e.g., email, push notifications), sound effects volume, and game difficulty level.
+- Leaderboard Data: Information required to display a leaderboard, including player IDs, usernames, and their corresponding scores or rankings.
+- Invites and Friend Lists: Data related to social features, including sent and received game invites, friend lists, and associated player IDs.
+
+**NOTE** not all of these features will make it into the first version of this game
+
 
 ## External services and data sources
 
-Google account
+**Google Identity Services**
+- Service Name: Google Identity Services
+- [Google identity services overview](https://developers.google.com/identity/gsi/web/guides/overview)
+- Usage: Google Identity Services will be used for user authentication in the Farkle app. It allows users to log in with their Google accounts, ensuring a secure and convenient authentication process. By integrating this service, we can associate users with their desired game names and, in future releases, track score rankings, user preferences, communication methods, and preferred opponents.
+- Impact of Interruption: If Google Identity Services is unavailable, users will not be able to log in to the Farkle application, rendering the app inaccessible for gameplay.
+
+**Digital Ocean Droplets**
+- Service Name: Digital Ocean Droplets
+- [Digital Ocean Droplets Product Page](https://www.digitalocean.com/products/droplets)
+- Usage: Digital Ocean Droplets will be utilized as the backend infrastructure for the Farkle application. It will host the database and web server, managing the business logic and web services required for the app's functionality. Droplets provide a scalable and reliable environment for running the application's backend.
+- Impact of Interruption: If Digital Ocean Droplets are unavailable, the Farkle application will not function, as the backend services and database will be inaccessible, preventing users from playing the game.
