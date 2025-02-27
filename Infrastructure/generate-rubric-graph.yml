@@ -1,34 +1,22 @@
-name: Generate Rubric Graph
+import graphviz
 
-on:
-  push:
-    branches:
-      - mincfranc-patch-1  # This is your branch name
-
-jobs:
-  generate-graph:
-    runs-on: ubuntu-latest
+def generate_rubric_graph():
+    graph = graphviz.Digraph(format='svg')
     
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+    # Define nodes and edges for the graph
+    graph.node('A', 'Project Setup and Structure')
+    graph.node('B', 'Documentation')
+    graph.node('C', 'Server-Side Implementation')
+    graph.node('D', 'Client-Side Implementation')
+    graph.node('E', 'Testing and Submission')
 
-      - name: Set up Python environment
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.9'  # You can change the Python version if needed
+    graph.edge('A', 'B')
+    graph.edge('B', 'C')
+    graph.edge('C', 'D')
+    graph.edge('D', 'E')
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install graphviz
+    # Generate and save the graph as an SVG file
+    graph.render('rubric_graph')
 
-      - name: Generate Graph
-        run: |
-          python Infrastructure/generate_graph.py  # Run the Python script from Infrastructure folder
-
-      - name: Commit and push the generated graph
-        run: |
-          git add Infrastructure/rubric_graph.svg
-          git commit -m "Add generated rubric graph"
-          git push
+if __name__ == '__main__':
+    generate_rubric_graph()
