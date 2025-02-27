@@ -12,4 +12,5 @@
 
 [//]: # (TODO Select a suitable open source license, and include the required information below.)
 
-![Rubric Breakdown](rubric_graph.svg)
+![Rubric Breakdown](Infrastructure/rubric_graph.svg)
+
