@@ -1,0 +1,83 @@
+graph TD;
+    subgraph Project Setup and Structure
+        README.md[Project's main README.md file] --> docs[docs folder]
+        docs --> GitHubPages[GitHub Pages setup]
+        GitHubPages --> ProjectOverview[Clear project overview]
+    end
+
+    subgraph Android Project Structure
+        AndroidStructure["Establish clean and organized structure"] --> StandardStructure["Standard Android project structure"]
+        StandardStructure --> CleanArchitecture["Consider Clean Architecture or MVVM"]
+        CleanArchitecture --> PackageStructure["Package structure"]
+        PackageStructure --> modelEntity["com.yourdomain.yourproject.model.entity"]
+        PackageStructure --> modelDao["com.yourdomain.yourproject.model.dao"]
+        PackageStructure --> service["com.yourdomain.yourproject.service"]
+        PackageStructure --> controller["com.yourdomain.yourproject.controller"]
+        PackageStructure --> auth["com.yourdomain.yourproject.auth"]
+    end
+
+    subgraph Dependency Management
+        Gradle["Manage dependencies using Gradle"] --> buildGradle["build.gradle (Module:app) file"]
+        buildGradle --> RetrofitVolley["Retrofit or Volley for network requests"]
+        buildGradle --> GsonMoshi["Gson or Moshi for JSON serialization/deserialization"]
+        buildGradle --> OkHttp["OkHttp for networking"]
+        buildGradle --> SpringBootSecOAuth["Spring Boot Security and OAuth2 dependencies"]
+        buildGradle --> DBDependencies["Database dependencies"]
+    end
+
+    subgraph Documentation (GitHub Pages)
+        ProjectDescription["Project Description"] --> docsIndex["docs/index.html or docs/index.md"]
+        IntendedUsers["Intended Users and User Stories"] --> docsUsers["docs/users.html or docs/users.md"]
+        UMLClassDiagram["UML Class Diagram"] --> docsUML["docs/uml.png, .svg, and docs/uml.pdf"]
+        ERD["Entity-Relationship Diagram (ERD)"] --> docsERD["docs/erd.png, .svg, and docs/erd.pdf"]
+        DDL["Data Definition Language (DDL) SQL Code"] --> docsDDL["docs/sql/ddl.sql, docs/sql/ddl.html or .md"]
+    end
+
+    subgraph Server-Side Implementation (Backend)
+        EntityClasses["Entity Classes"] --> modelEntityPackage["model.entity package"]
+        EntityClasses --> JPAHibernate["JPA/Hibernate entities"]
+        EntityClasses --> Annotations["Proper annotations"]
+        EntityClasses --> GettersSetters["Getters and setters"]
+        EntityClasses --> SourceCodeLink["Link to source code"]
+
+        RepositoryInterfaces["Repository Interfaces"] --> modelDaoPackage["model.dao package"]
+        RepositoryInterfaces --> JpaRepository["Interfaces extending JpaRepository"]
+        RepositoryInterfaces --> CrudRepository["or CrudRepository"]
+        RepositoryInterfaces --> PagingAndSorting["or PagingAndSortingRepository"]
+        RepositoryInterfaces --> SourceCodeLink2["Link to source code"]
+
+        OAuthResourceServer["OAuth 2.0 Resource Server"] --> SpringBootSecOAuth2["Spring Boot Security and OAuth2 dependencies"]
+        OAuthResourceServer --> AuthConfig["Configuration for authentication"]
+        OAuthResourceServer --> BearerTokenValidation["Bearer token validation"]
+        OAuthResourceServer --> IDTokenCapture["ID token capture mechanism"]
+        OAuthResourceServer --> ProviderCredentials["Oauth2 provider credentials setup"]
+
+        RESTControllers["REST Controllers and Application Logic Services"] --> controllerPackage["controller package"]
+        RESTControllers --> ServicePackage["service package"]
+        RESTControllers --> UserEndpoint["User controller with /users/me endpoint"]
+        RESTControllers --> HTTPStatusCodes["Proper HTTP status codes"]
+        RESTControllers --> JSONHandling["JSON request/response bodies"]
+        RESTControllers --> PluralURLPaths["Plural-named URL paths"]
+        RESTControllers --> SourceCodeLink3["Link to source code"]
+    end
+
+    subgraph Client-Side Implementation (Android App)
+        OAuthClient["OAuth 2.0 Client"] --> GoogleSignIn["Android project with Google Sign-In"]
+        OAuthClient --> IDTokenObtain["Code to obtain ID token"]
+        OAuthClient --> IDTokenLogging["Logging of ID token"]
+
+        NetworkCommunication["Network Communication"] --> RetrofitVolleyClient["Retrofit or Volley network client"]
+        NetworkCommunication --> BearerTokenAuth["Ability to send bearer token in authorization header"]
+        NetworkCommunication --> JSONHandlingAndroid["Code to handle JSON responses"]
+    end
+
+    subgraph Testing and Submission
+        Testing["Testing"] --> UnitTests["Unit tests for service classes"]
+        Testing --> IntegrationTests["Integration tests for API endpoints"]
+        Testing --> ManualTesting["Manual testing of Android app"]
+
+        Submission["Submission"] --> CleanRepository["Clean and well-organized repository"]
+        Submission --> Documentation["All documentation in docs folder"]
+        Submission --> READMEInstructions["Clear instructions in README.md"]
+        Submission --> GitVersionControl["Proper git commits and version control"]
+    end
