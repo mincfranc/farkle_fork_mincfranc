@@ -1,5 +1,9 @@
 ```mermaid
-flowchart TD;
+graph TD;
+A-->B;
+B-->C;
+C-->D;
+
     subgraph ProjectSetup
         README["Project's README.md"] --> Docs["Docs Folder"]
         Docs --> GitHubPages["GitHub Pages Setup"]
