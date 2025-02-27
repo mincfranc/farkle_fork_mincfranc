@@ -1,67 +1,62 @@
-```mermaid
-graph TD;
-A-->B;
-B-->C;
-C-->D;
+pip install graphviz
 
-    subgraph ProjectSetup
-        README["Project's README.md"] --> Docs["Docs Folder"]
-        Docs --> GitHubPages["GitHub Pages Setup"]
-        GitHubPages --> ProjectOverview["Project Overview"]
-    end
+from graphviz import Digraph
 
-    subgraph AndroidStructure
-        StandardStructure["Standard Structure"]
-        CleanArch["Clean Architecture"]
-        PackageStructure["Package Structure"]
-        DependencyMgmt["Dependency Management"]
-    end
+# Create a Digraph (directed graph)
+dot = Digraph(comment='GitHub Rubric2 Breakdown')
 
-    subgraph DependencyMgmt
-        Gradle["Gradle"]
-        Retrofit["Retrofit"]
-        Gson["Gson"]
-        OkHttp["OkHttp"]
-        SpringOAuth["Spring OAuth"]
-        DB["Database Libs"]
-    end
+# Define the main sections
+dot.node('I', 'I. Project Setup and Structure (Android Context)')
+dot.node('II', 'II. Documentation (GitHub Pages)')
+dot.node('III', 'III. Server-Side Implementation (Backend)')
+dot.node('IV', 'IV. Client-Side Implementation (Android App)')
+dot.node('V', 'V. Testing and Submission')
 
-    subgraph Documentation
-        ProjectDesc["Project Description"]
-        Users["User Stories"]
-        UML["UML Diagram"]
-        ERD["ER Diagram"]
-        DDL["DDL SQL"]
-    end
+# Define sub-sections for each main section
+dot.node('I_A', 'A. Introduction and Overview')
+dot.node('I_B', 'B. Android Project Structure')
+dot.node('I_C', 'C. Dependency Management')
 
-    subgraph ServerSide
-        Entity["Entity Classes"]
-        Repo["Repositories"]
-        OAuthServer["OAuth Server"]
-        REST["REST APIs"]
-    end
+dot.node('II_A', 'A. Project Description')
+dot.node('II_B', 'B. Intended Users and User Stories')
+dot.node('II_C', 'C. UML Class Diagram')
+dot.node('II_D', 'D. Entity-Relationship Diagram (ERD)')
+dot.node('II_E', 'E. Data Definition Language (DDL) SQL Code')
 
-    subgraph ClientSide
-        OAuthClient["OAuth Client"]
-        Network["Network"]
-    end
+dot.node('III_A', 'A. Entity Classes')
+dot.node('III_B', 'B. Repository Interfaces')
+dot.node('III_C', 'C. OAuth 2.0 Resource Server')
+dot.node('III_D', 'D. REST Controllers and Application Logic Services')
 
-    subgraph Testing
-        UnitTests["Unit Tests"]
-        IntegrationTests["Integration Tests"]
-        ManualTesting["Manual Testing"]
-    end
+dot.node('IV_A', 'A. OAuth 2.0 Client (Minimal)')
+dot.node('IV_B', 'B. Network Communication')
 
-    subgraph Submission
-        CleanRepo["Clean Repository"]
-        DocsInRepo["Docs in Repo"]
-        Instructions["README Instructions"]
-        GitControl["Git Version Control"]
-    end
+dot.node('V_A', 'A. Testing')
+dot.node('V_B', 'B. Submission')
 
-    classDef green fill:#9f6,stroke:#333,stroke-width:2px;
-    classDef orange fill:#f96,stroke:#333,stroke-width:2px;
-    classDef blue fill:#6cf,stroke:#333,stroke-width:2px;
+# Add edges to show hierarchy
+dot.edge('I', 'I_A')
+dot.edge('I', 'I_B')
+dot.edge('I', 'I_C')
 
-    class ProjectSetup,AndroidStructure,Documentation,ServerSide,ClientSide,Testing,Submission green;
-    class DependencyMgmt orange;
+dot.edge('II', 'II_A')
+dot.edge('II', 'II_B')
+dot.edge('II', 'II_C')
+dot.edge('II', 'II_D')
+dot.edge('II', 'II_E')
+
+dot.edge('III', 'III_A')
+dot.edge('III', 'III_B')
+dot.edge('III', 'III_C')
+dot.edge('III', 'III_D')
+
+dot.edge('IV', 'IV_A')
+dot.edge('IV', 'IV_B')
+
+dot.edge('V', 'V_A')
+dot.edge('V', 'V_B')
+
+# Render the graph to SVG file (which is compatible with GitHub)
+dot.render('rubric_graph', format='svg', cleanup=True)
+
+print("Graph has been generated as rubric_graph.svg")
