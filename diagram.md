@@ -1,54 +1,63 @@
-graph TD;
-    subgraph Project Setup and Structure
-        README.md[Project's README.md] --> DocsFolder["Docs Folder"]
-        DocsFolder --> GitHubPages[GitHub Pages Setup]
-        GitHubPages --> ProjectOverview[Project Overview]
+```mermaid
+flowchart TD;
+    subgraph ProjectSetup
+        README["Project's README.md"] --> Docs["Docs Folder"]
+        Docs --> GitHubPages["GitHub Pages Setup"]
+        GitHubPages --> ProjectOverview["Project Overview"]
     end
 
-    subgraph Android Project Structure
+    subgraph AndroidStructure
         StandardStructure["Standard Structure"]
-        CleanArchitecture["Clean Architecture or MVVM"]
+        CleanArch["Clean Architecture"]
         PackageStructure["Package Structure"]
-        DependencyManagement["Dependency Management"]
+        DependencyMgmt["Dependency Management"]
     end
 
-    subgraph Dependency Management
-        Gradle["Gradle Dependencies"]
-        RetrofitVolley["Retrofit/Volley"]
-        GsonMoshi["Gson/Moshi"]
+    subgraph DependencyMgmt
+        Gradle["Gradle"]
+        Retrofit["Retrofit"]
+        Gson["Gson"]
         OkHttp["OkHttp"]
-        SpringBootSecOAuth["Spring Boot Security & OAuth2"]
-        DatabaseLibs["Database Libraries"]
+        SpringOAuth["Spring OAuth"]
+        DB["Database Libs"]
     end
 
-    subgraph Documentation (GitHub Pages)
-        ProjectDescription["Project Description"]
-        IntendedUsers["Intended Users & User Stories"]
-        UMLClassDiagram["UML Class Diagram"]
+    subgraph Documentation
+        ProjectDesc["Project Description"]
+        Users["User Stories"]
+        UML["UML Diagram"]
         ERD["ER Diagram"]
-        DDL["DDL SQL Code"]
+        DDL["DDL SQL"]
     end
 
-    subgraph Server-Side Implementation (Backend)
-        EntityClasses["Entity Classes"]
-        RepositoryInterfaces["Repository Interfaces"]
-        OAuthResourceServer["OAuth2 Resource Server"]
-        RESTControllers["REST Controllers & Services"]
+    subgraph ServerSide
+        Entity["Entity Classes"]
+        Repo["Repositories"]
+        OAuthServer["OAuth Server"]
+        REST["REST APIs"]
     end
 
-    subgraph Client-Side Implementation (Android App)
-        OAuthClient["OAuth2 Client"]
-        NetworkCommunication["Network Communication"]
+    subgraph ClientSide
+        OAuthClient["OAuth Client"]
+        Network["Network"]
     end
 
-    subgraph Testing and Submission
-        Testing["Testing"]
-        Submission["Submission"]
+    subgraph Testing
+        UnitTests["Unit Tests"]
+        IntegrationTests["Integration Tests"]
+        ManualTesting["Manual Testing"]
+    end
+
+    subgraph Submission
+        CleanRepo["Clean Repository"]
+        DocsInRepo["Docs in Repo"]
+        Instructions["README Instructions"]
+        GitControl["Git Version Control"]
     end
 
     classDef green fill:#9f6,stroke:#333,stroke-width:2px;
     classDef orange fill:#f96,stroke:#333,stroke-width:2px;
     classDef blue fill:#6cf,stroke:#333,stroke-width:2px;
 
-    class Project Setup and Structure,Android Project Structure,Documentation (GitHub Pages),Server-Side Implementation (Backend),Client-Side Implementation (Android App),Testing and Submission green;
-    class Dependency Management orange;
+    class ProjectSetup,AndroidStructure,Documentation,ServerSide,ClientSide,Testing,Submission green;
+    class DependencyMgmt orange;
