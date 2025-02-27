@@ -11,3 +11,6 @@
 &copy; 2025 {team members}.
 
 [//]: # (TODO Select a suitable open source license, and include the required information below.)
+
+![Rubric Breakdown](Infrastructure/rubric_graph.svg)
+
