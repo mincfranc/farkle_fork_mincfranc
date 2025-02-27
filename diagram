@@ -1,83 +1,44 @@
-graph TD;
-    subgraph Project Setup and Structure
-        README.md[Project's main README.md file] --> docs[docs folder]
-        docs --> GitHubPages[GitHub Pages setup]
-        GitHubPages --> ProjectOverview[Clear project overview]
+```mermaid
+graph TD
+    A[Capstone Project] --> B(Documentation - GitHub Pages);
+    A --> C(Server-Side Implementation - Backend);
+    A --> D(Client-Side Implementation - Android App);
+
+    B --> B1["Project Description (index.html/md)"];
+    B --> B2["Intended Users & User Stories (users.html/md)"];
+    B --> B3["UML Class Diagram (uml.png/svg, uml.pdf)"];
+    B --> B4["Entity-Relationship Diagram (erd.png/svg, erd.pdf)"];
+    B --> B5["Data Definition Language (ddl.sql, ddl.html/md)"];
+
+    C --> C1["Entity Classes (model.entity)"];
+    C --> C2["Repository Interfaces (model.dao)"];
+    C --> C3["OAuth 2.0 Resource Server (Security Config)"];
+    C --> C4["REST Controllers (controller)"];
+    C --> C5["Application Logic Services (service)"];
+
+    D --> D1["OAuth 2.0 Client (Google Sign-In)"];
+    D --> D2["Network Communication (Retrofit/Volley)"];
+    D --> D3["ID Token Logging (Logcat)"];
+
+    C1 --> C2;
+    C4 --> C5;
+    C5 --> C2;
+    D2 --> C4;
+
+    style A fill:#f9f,stroke:#333,stroke-width:2px;
+    style B fill:#ccf,stroke:#333;
+    style C fill:#cfc,stroke:#333;
+    style D fill:#ffc,stroke:#333;
+    style B1,B2,B3,B4,B5 fill:#eef,stroke:#333;
+    style C1,C2,C3,C4,C5 fill:#efe,stroke:#333;
+    style D1,D2,D3 fill:#ffe,stroke:#333;
+
+    subgraph "Backend Data Flow"
+    C4 -->|Requests| C5;
+    C5 -->|Data Access| C2;
+    C2 -->|Database| C1;
     end
 
-    subgraph Android Project Structure
-        AndroidStructure["Establish clean and organized structure"] --> StandardStructure["Standard Android project structure"]
-        StandardStructure --> CleanArchitecture["Consider Clean Architecture or MVVM"]
-        CleanArchitecture --> PackageStructure["Package structure"]
-        PackageStructure --> modelEntity["com.yourdomain.yourproject.model.entity"]
-        PackageStructure --> modelDao["com.yourdomain.yourproject.model.dao"]
-        PackageStructure --> service["com.yourdomain.yourproject.service"]
-        PackageStructure --> controller["com.yourdomain.yourproject.controller"]
-        PackageStructure --> auth["com.yourdomain.yourproject.auth"]
-    end
-
-    subgraph Dependency Management
-        Gradle["Manage dependencies using Gradle"] --> buildGradle["build.gradle (Module:app) file"]
-        buildGradle --> RetrofitVolley["Retrofit or Volley for network requests"]
-        buildGradle --> GsonMoshi["Gson or Moshi for JSON serialization/deserialization"]
-        buildGradle --> OkHttp["OkHttp for networking"]
-        buildGradle --> SpringBootSecOAuth["Spring Boot Security and OAuth2 dependencies"]
-        buildGradle --> DBDependencies["Database dependencies"]
-    end
-
-    subgraph Documentation (GitHub Pages)
-        ProjectDescription["Project Description"] --> docsIndex["docs/index.html or docs/index.md"]
-        IntendedUsers["Intended Users and User Stories"] --> docsUsers["docs/users.html or docs/users.md"]
-        UMLClassDiagram["UML Class Diagram"] --> docsUML["docs/uml.png, .svg, and docs/uml.pdf"]
-        ERD["Entity-Relationship Diagram (ERD)"] --> docsERD["docs/erd.png, .svg, and docs/erd.pdf"]
-        DDL["Data Definition Language (DDL) SQL Code"] --> docsDDL["docs/sql/ddl.sql, docs/sql/ddl.html or .md"]
-    end
-
-    subgraph Server-Side Implementation (Backend)
-        EntityClasses["Entity Classes"] --> modelEntityPackage["model.entity package"]
-        EntityClasses --> JPAHibernate["JPA/Hibernate entities"]
-        EntityClasses --> Annotations["Proper annotations"]
-        EntityClasses --> GettersSetters["Getters and setters"]
-        EntityClasses --> SourceCodeLink["Link to source code"]
-
-        RepositoryInterfaces["Repository Interfaces"] --> modelDaoPackage["model.dao package"]
-        RepositoryInterfaces --> JpaRepository["Interfaces extending JpaRepository"]
-        RepositoryInterfaces --> CrudRepository["or CrudRepository"]
-        RepositoryInterfaces --> PagingAndSorting["or PagingAndSortingRepository"]
-        RepositoryInterfaces --> SourceCodeLink2["Link to source code"]
-
-        OAuthResourceServer["OAuth 2.0 Resource Server"] --> SpringBootSecOAuth2["Spring Boot Security and OAuth2 dependencies"]
-        OAuthResourceServer --> AuthConfig["Configuration for authentication"]
-        OAuthResourceServer --> BearerTokenValidation["Bearer token validation"]
-        OAuthResourceServer --> IDTokenCapture["ID token capture mechanism"]
-        OAuthResourceServer --> ProviderCredentials["Oauth2 provider credentials setup"]
-
-        RESTControllers["REST Controllers and Application Logic Services"] --> controllerPackage["controller package"]
-        RESTControllers --> ServicePackage["service package"]
-        RESTControllers --> UserEndpoint["User controller with /users/me endpoint"]
-        RESTControllers --> HTTPStatusCodes["Proper HTTP status codes"]
-        RESTControllers --> JSONHandling["JSON request/response bodies"]
-        RESTControllers --> PluralURLPaths["Plural-named URL paths"]
-        RESTControllers --> SourceCodeLink3["Link to source code"]
-    end
-
-    subgraph Client-Side Implementation (Android App)
-        OAuthClient["OAuth 2.0 Client"] --> GoogleSignIn["Android project with Google Sign-In"]
-        OAuthClient --> IDTokenObtain["Code to obtain ID token"]
-        OAuthClient --> IDTokenLogging["Logging of ID token"]
-
-        NetworkCommunication["Network Communication"] --> RetrofitVolleyClient["Retrofit or Volley network client"]
-        NetworkCommunication --> BearerTokenAuth["Ability to send bearer token in authorization header"]
-        NetworkCommunication --> JSONHandlingAndroid["Code to handle JSON responses"]
-    end
-
-    subgraph Testing and Submission
-        Testing["Testing"] --> UnitTests["Unit tests for service classes"]
-        Testing --> IntegrationTests["Integration tests for API endpoints"]
-        Testing --> ManualTesting["Manual testing of Android app"]
-
-        Submission["Submission"] --> CleanRepository["Clean and well-organized repository"]
-        Submission --> Documentation["All documentation in docs folder"]
-        Submission --> READMEInstructions["Clear instructions in README.md"]
-        Submission --> GitVersionControl["Proper git commits and version control"]
+    subgraph "Client-Server Interaction"
+    D2 -->|API Calls with Bearer Token| C4;
     end
