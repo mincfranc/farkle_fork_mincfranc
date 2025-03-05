@@ -1,71 +1,54 @@
 package edu.cnm.deepdive.farkle.model.entity;
-
-import androidx.room.Entity;
+import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
 @Entity
-@Table(name = "roll")  // Matches table name from ERD
+@Table(name = "roll")
 public class Roll {
-
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)  // Primary key auto-generated
-  @Column(name = "rollid")  // Column name as per ERD
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "rollid")
   private Long rollId;
-
-  @Column(name = "numberdice", nullable = true)  // Column is nullable, matches ERD
+  @Column(name = "numberdice") // Removed nullable as JPA defaults to nullable
   private Integer numberDice;
-
-  @ElementCollection  // ElementCollection for storing simple collection of integers (dice values)
+  @ElementCollection
   @CollectionTable(name = "roll_dice_values", joinColumns = @JoinColumn(name = "roll_id"))
   @Column(name = "dice_value")
-  private List<Integer> diceValues = new ArrayList<>();  // Initialize with an empty list
-
-  @ElementCollection  // ElementCollection for storing simple collection of integers (score values)
+  private List<Integer> diceValues = new ArrayList<>();
+  @ElementCollection
   @CollectionTable(name = "roll_score_values", joinColumns = @JoinColumn(name = "roll_id"))
   @Column(name = "score_value")
-  private List<Integer> scoreValues = new ArrayList<>();  // Initialize with an empty list
-
-  @Column(name = "farkle", nullable = true)  // Column is nullable, matches ERD
+  private List<Integer> scoreValues = new ArrayList<>();
+  @Column(name = "farkle") // Removed nullable as JPA defaults to nullable
   private Boolean farkle;
-
-  // Getters and Setters
+  // Getters and Setters (same as before)
   public Long getRollId() {
     return rollId;
   }
-
   public void setRollId(Long rollId) {
     this.rollId = rollId;
   }
-
   public Integer getNumberDice() {
     return numberDice;
   }
-
   public void setNumberDice(Integer numberDice) {
     this.numberDice = numberDice;
   }
-
   public List<Integer> getDiceValues() {
     return diceValues;
   }
-
   public void setDiceValues(List<Integer> diceValues) {
     this.diceValues = diceValues;
   }
-
   public List<Integer> getScoreValues() {
     return scoreValues;
   }
-
   public void setScoreValues(List<Integer> scoreValues) {
     this.scoreValues = scoreValues;
   }
-
   public Boolean getFarkle() {
     return farkle;
   }
-
   public void setFarkle(Boolean farkle) {
     this.farkle = farkle;
   }
