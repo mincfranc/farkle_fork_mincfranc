@@ -1,6 +1,5 @@
 package edu.cnm.deepdive.farkle.model.entity;
 
-import androidx.room.Entity;
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
