@@ -1,47 +1,36 @@
 package edu.cnm.deepdive.farkle.model.entity;
-
-import androidx.room.Entity;
+import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
 @Entity
-@Table(name = "score_master")  // Matches table name from ERD
+@Table(name = "score_master")
 public class ScoreMaster {
-
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)  // Primary key auto-generated
-  @Column(name = "scoreid")  // Column name as per ERD
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "scoreid")
   private Long scoreId;
-
-  @ElementCollection  // ElementCollection for storing simple collection of integers (score values)
+  @ElementCollection
   @CollectionTable(name = "score_values", joinColumns = @JoinColumn(name = "score_id"))
   @Column(name = "value")
-  private List<Integer> values = new ArrayList<>();  // Initialize with an empty list
-
-  @Column(name = "bankscore", nullable = true)  // Column is nullable, matches ERD
+  private List<Integer> values = new ArrayList<>();
+  @Column(name = "bankscore") // Removed nullable as JPA defaults to nullable
   private Integer bankScore;
-
-  // Getters and Setters
+  // Getters and Setters (same as before)
   public Long getScoreId() {
     return scoreId;
   }
-
   public void setScoreId(Long scoreId) {
     this.scoreId = scoreId;
   }
-
   public List<Integer> getValues() {
     return values;
   }
-
   public void setValues(List<Integer> values) {
     this.values = values;
   }
-
   public Integer getBankScore() {
     return bankScore;
   }
-
   public void setBankScore(Integer bankScore) {
     this.bankScore = bankScore;
   }

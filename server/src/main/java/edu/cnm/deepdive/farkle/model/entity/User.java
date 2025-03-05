@@ -1,43 +1,32 @@
 package edu.cnm.deepdive.farkle.model.entity;
-
-import androidx.room.Entity;
-
+import jakarta.persistence.*;
 @Entity
-@Table(name = "user")  // Matches table name from ERD
+@Table(name = "user")
 public class User {
-
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)  // Primary key auto-generated
-  @Column(name = "userid")  // Column name as per ERD
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "userid")
   private Long userId;
-
-  @Column(name = "oauthcode", nullable = true)  // Column is nullable, matches ERD
+  @Column(name = "oauthcode") // Removed nullable as JPA defaults to nullable
   private String oauthCode;
-
-  @Column(name = "gamename", nullable = true)  // Column is nullable, matches  ERD
+  @Column(name = "gamename") // Removed nullable as JPA defaults to nullable
   private String gameName;
-
-  // Getters and Setters follow JavaBeans convention
+  // Getters and Setters (same as before)
   public Long getUserId() {
     return userId;
   }
-
   public void setUserId(Long userId) {
     this.userId = userId;
   }
-
   public String getOauthCode() {
     return oauthCode;
   }
-
   public void setOauthCode(String oauthCode) {
     this.oauthCode = oauthCode;
   }
-
   public String getGameName() {
     return gameName;
   }
-
   public void setGameName(String gameName) {
     this.gameName = gameName;
   }
