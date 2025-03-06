@@ -1,8 +1,13 @@
 package edu.cnm.deepdive.farkle.model.entity;
 
-import jakarta.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "turn")  // Matches table name from ERD
@@ -10,34 +15,26 @@ public class Turn {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)  // Primary key auto-generated
-  @Column(name = "turnid")  // Column name as per ERD
+  @Column(name = "turn_id")  // Column name as per ERD
   private Long turnId;
 
-  @OneToMany(mappedBy = "turn")  // One-to-many relationship with Roll (each turn has multiple rolls)
-  private List<Roll> rolls = new ArrayList<>();  // Initialize collection with an empty list
-
-  @Column(name = "turnscore", nullable = true)  // Column is nullable, matches ERD
+  @Column(name = "turn_score", nullable = false)
   private Integer turnScore;
 
-  @Column(name = "finished", nullable = true)  // Column is nullable, matches ERD
+  @Column(name = "finished", nullable = false)
   private Boolean finished;
+
+  @ManyToOne (optional = false)
+  private Game game;
+
+  //Constructor
 
   // Getters and Setters
   public Long getTurnId() {
     return turnId;
   }
 
-  public void setTurnId(Long turnId) {
-    this.turnId = turnId;
-  }
 
-  public List<Roll> getRolls() {
-    return rolls;
-  }
-
-  public void setRolls(List<Roll> rolls) {
-    this.rolls = rolls;
-  }
 
   public Integer getTurnScore() {
     return turnScore;
@@ -47,6 +44,7 @@ public class Turn {
     this.turnScore = turnScore;
   }
 
+
   public Boolean getFinished() {
     return finished;
   }
@@ -54,4 +52,10 @@ public class Turn {
   public void setFinished(Boolean finished) {
     this.finished = finished;
   }
+
+
+  public Game getGame() {return game;}
+
+  public void setGame(Game game) {this.game = game;}
+
 }

@@ -13,31 +13,18 @@ public class ScoreMaster {
   @Column(name = "scoreid")
   private Long scoreId;
 
-  @ElementCollection
-  @CollectionTable(name = "score_values", joinColumns = @JoinColumn(name = "score_id"))
-  @Column(name = "value")
-  private List<Integer> values = new ArrayList<>();
-
-  @Column(name = "bankscore") // Removed nullable as JPA defaults to nullable
+  @Column(name = "bankscore", nullable = true)
   private Integer bankScore;
 
-  // Getters and Setters (same as before)
-  public Long getScoreId() {
-    return scoreId;
-  }
-  public void setScoreId(Long scoreId) {
-    this.scoreId = scoreId;
-  }
-  public List<Integer> getValues() {
-    return values;
-  }
-  public void setValues(List<Integer> values) {
-    this.values = values;
-  }
+  //Getters & Setters
+  public Long getScoreId() {return scoreId;}
+
   public Integer getBankScore() {
     return bankScore;
   }
+
   public void setBankScore(Integer bankScore) {
     this.bankScore = bankScore;
   }
+
 }
