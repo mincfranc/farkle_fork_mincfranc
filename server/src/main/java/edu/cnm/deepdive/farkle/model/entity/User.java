@@ -5,22 +5,22 @@ import jakarta.persistence.*;
 import java.util.UUID;
 
 @Entity
-@Table(name = "user")
+@Table(name = "user_profile")
 public class User {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "userid")
+  @Column(name = "user_profile_id", nullable = false)
   private Long userId;
 
   @Column(nullable = false, updatable = false, unique = true)
   @JsonProperty(value = "key", access = JsonProperty.Access.READ_ONLY)
   private UUID externalKey;
 
-  @Column(name = "oauthcode", nullable = false, unique = true) //JPA defaults to nullable
-  private String oauthCode;
+  @Column(name = "auth_code", nullable = false, unique = true) //JPA defaults to nullable
+  private String authCode;
 
-  @Column(name = "gamename", nullable = false, unique = true)
+  @Column(name = "game_name", nullable = false, unique = true)
   private String gameName;
 
   // Getters & Setters
@@ -30,14 +30,27 @@ public class User {
 
   //fields oauthcode & gamename need getters and setters
   //they are nullable fields and are expected to change with every user
+  public String getAuthCode() {
+    return authCode;
+  }
 
-  public String getOauthCode() {return oauthCode;}
+  public UUID getExternalKey() {
+    return externalKey;
+  }
 
-  public void setOauthCode(String oauthCode) {this.oauthCode = oauthCode;}
+  public void setAuthCode(String authCode) {
+    this.authCode = authCode;
+  }
+
+  public String getGameName() {
+    return gameName;
+  }
+
+  public void setGameName(String gameName) {
+    this.gameName = gameName;
+  }
 
 
-  public String getGameName() {return gameName;}
 
-  public void setGameName(String gameName) {this.gameName = gameName;}
   
 }

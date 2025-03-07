@@ -8,10 +8,12 @@ public class Game {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "game_id", nullable = false)
   private Long gameId;
 
+
   @ManyToOne
-  @JoinColumn(name = "current_player", optional = true) //foreign key 1
+  @JoinColumn(name = "current_player", nullable = false) //foreign key 1
   private User currentPlayer;
 
   @ManyToOne
@@ -19,11 +21,11 @@ public class Game {
   private Turn currentTurn;
 
   @ManyToOne
-  @JoinColumn(name = "winner", nullable = true)//foreign key 3
+  @JoinColumn(name = "winner", nullable = true)//foreign key 4
   private User winner;
 
   @ManyToOne
-  @JoinColumn(name = "game_state", nullable = false)//foreign key 4
+  @JoinColumn(name = "game_state", nullable = false)//foreign key 3
   private State state;
 
   // Constructor
@@ -41,8 +43,14 @@ public class Game {
   public User getWinner() { return winner; }
   public void setWinner(User winner) { this.winner = winner; }
 
-  public GameStatus getGameStatus() { return gameStatus; }
-  public void setGameStatus(GameStatus gameStatus) { this.gameStatus = gameStatus; }
+  public State getGameState() { return gameState; }
+  public void setGameState(State gameStatus) { this.gameState = gameStatus; }
+
+  // TODO: 3/7/25 Correct players field & add getter/setter
+  // @ManyToMany
+//  private List<UserProfile> players;
+
+
 }
 
 

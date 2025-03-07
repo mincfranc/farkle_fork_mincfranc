@@ -30,10 +30,9 @@ public class Turn {
   //Constructor
 
   // Getters and Setters
-  public Long getTurnId() {
+  private Long getTurnId() {
     return turnId;
   }
-
 
 
   public Integer getTurnScore() {
@@ -57,5 +56,10 @@ public class Turn {
   public Game getGame() {return game;}
 
   public void setGame(Game game) {this.game = game;}
+
+  // TODO: 3/7/25  correct rolls field & getter/setter
+//  @OneToMany
+//  private List<Roll> rolls;
+
 
 }

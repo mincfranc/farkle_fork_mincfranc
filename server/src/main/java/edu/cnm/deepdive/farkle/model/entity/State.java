@@ -3,7 +3,7 @@ package edu.cnm.deepdive.farkle.model.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "game_state")
+@Table(name = "game_status")
 public class State {
 
   @Id
