@@ -18,9 +18,6 @@ import java.util.List;
 @Entity
 public class Game {
 
-  @OneToMany(mappedBy = "game", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-  private final List<Turn> turns = new LinkedList<>();
-
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "game_id", nullable = false)
@@ -34,12 +31,15 @@ public class Game {
   @JoinColumn(name = "turn_id", nullable = true)
   private Turn currentTurn;
 
-  @ManyToOne
-  @JoinColumn(name = "profile_id", nullable = true)
+  @ManyToOne (fetch = FetchType.EAGER)
+  @JoinColumn(name = "user_profile_id", nullable = true)
   private User winner;
 
   @Enumerated(EnumType.STRING)
   private State state;
+
+  @OneToMany(mappedBy = "game", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+  private final List<Turn> turns = new LinkedList<>();
 
   // Getters and Setters
   public Long getId() {
@@ -48,10 +48,6 @@ public class Game {
 
   public User getCurrentPlayer() {
     return currentPlayer;
-  }
-
-  public void setCurrentPlayer(User currentPlayer) {
-    this.currentPlayer = currentPlayer;
   }
 
   public Turn getCurrentTurn() {
@@ -74,11 +70,11 @@ public class Game {
     return state;
   }
 
-  public void setState(State gameStatus) {
-    this.state = gameStatus;
+  public void setState(State state) {
+    this.state = state;
   }
 
-  // TODO: 3/7/25 Correct players field & add getter/setter
+// TODO: 3/7/25 Correct players field & add getter/setter
   // @ManyToMany
 //  private List<UserProfile> players;
 

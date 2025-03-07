@@ -13,7 +13,7 @@ public class ScoreMaster {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "score_id")
+  @Column(name = "score_id", nullable = false)
   private Long Id;
 
   @Column(nullable = true)
@@ -21,6 +21,7 @@ public class ScoreMaster {
 
   @ElementCollection
   private List<Integer> diceValues;
+  // TODO: 3/7/25 check with nick about list field 
 
   //Getters & Setters
   public Long getId() {
