@@ -16,9 +16,11 @@ public class ScoreMaster {
   @Column(name = "score_id", nullable = false)
   private Long Id;
 
+  // Bank score
   @Column(nullable = true)
   private Integer bankScore;
 
+  // List of dice values
   @ElementCollection
   private List<Integer> diceValues;
   // TODO: 3/7/25 check with nick about list field 
