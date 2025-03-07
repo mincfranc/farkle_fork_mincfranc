@@ -14,8 +14,7 @@
  *  limitations under the License.
  */
 import java.io.FileInputStream
-import java.util.Locale
-import java.util.Properties
+import java.util.*
 
 plugins {
     alias(libs.plugins.android.application)

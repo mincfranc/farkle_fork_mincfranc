@@ -20,20 +20,24 @@ public class Game {
 
   @OneToMany(mappedBy = "game", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
   private final List<Turn> turns = new LinkedList<>();
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "game_id", nullable = false)
   private Long Id;
-  @ManyToOne
-  @JoinColumn(nullable = false) //foreign key 1
+
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "user_profile_id", nullable = false)
   private User currentPlayer;
-  @ManyToOne
-  @JoinColumn(nullable = true)//foreign key 2
+
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "turn_id", nullable = true)
   private Turn currentTurn;
+
   @ManyToOne
-  @JoinColumn(nullable = true)//foreign key 4
+  @JoinColumn(name = "profile_id", nullable = true)
   private User winner;
-  @Column(nullable = false)
+
   @Enumerated(EnumType.STRING)
   private State state;
 
