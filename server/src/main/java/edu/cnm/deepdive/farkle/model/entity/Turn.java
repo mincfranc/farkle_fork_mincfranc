@@ -12,22 +12,24 @@ import jakarta.persistence.ManyToOne;
 @Entity
 public class Turn {
 
+  // Primary key field
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)  // Primary key auto-generated
-  @Column(name = "turn_id")  // Column name as per ERD
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "turn_id")
   private Long Id;
 
+  // Score for the turn
   @Column(nullable = false)
   private Integer turnScore;
 
+  // Flag indicating if the turn is finished
   @Column(nullable = false)
   private Boolean finished;
 
-  @ManyToOne (optional = false, fetch = FetchType.LAZY)
+  // Reference to game entity
+  @ManyToOne(optional = false, fetch = FetchType.LAZY)
   @JoinColumn(name = "game_id", nullable = false, updatable = false)
   private Game game;
-
-  //Constructor
 
   // Getters and Setters
   private Long getId() {
@@ -52,9 +54,13 @@ public class Turn {
   }
 
 
-  public Game getGame() {return game;}
+  public Game getGame() {
+    return game;
+  }
 
-  public void setGame(Game game) {this.game = game;}
+  public void setGame(Game game) {
+    this.game = game;
+  }
 
   // TODO: 3/7/25  correct rolls field & getter/setter
 //  @OneToMany

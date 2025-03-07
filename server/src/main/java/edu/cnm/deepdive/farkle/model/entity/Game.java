@@ -23,21 +23,26 @@ public class Game {
   @Column(name = "game_id", nullable = false)
   private Long Id;
 
+  // Reference to the current player
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "user_profile_id", nullable = false)
   private User currentPlayer;
 
+  // Reference to the current turn
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "turn_id", nullable = true)
   private Turn currentTurn;
 
-  @ManyToOne (fetch = FetchType.EAGER)
-  @JoinColumn(name = "user_profile_id", nullable = true)
+  // Reference to the winner
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "user_profile_id", nullable = true, insertable = false, updatable = false)
   private User winner;
 
+  // State of the game
   @Enumerated(EnumType.STRING)
   private State state;
 
+  // List of turns
   @OneToMany(mappedBy = "game", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
   private final List<Turn> turns = new LinkedList<>();
 

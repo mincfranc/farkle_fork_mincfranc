@@ -14,30 +14,32 @@ import java.util.UUID;
 @Table(name = "user_profile")
 public class User {
 
+  // Primary key  field
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "user_profile_id", nullable = false)
   private Long Id;
 
+  // Unique identifier for the  user
   @Column(nullable = false, updatable = false, unique = true)
   @JsonProperty(value = "key", access = JsonProperty.Access.READ_ONLY)
   private UUID externalKey;
 
+  // Authentication key for the user
   @Column(nullable = true)
   private String authKey;
 
+  // Display name for the user
   @Column(nullable = true)
   private String displayName;
 
-  // Getters & Setters
-  //"userId" Needs a getter for retrieval of data
-  //"userId" does not need setters. It is an immutable field & a primary key, set once and should not be modified.
+
+  // Getter for primary key
   public Long getId() {
     return Id;
   }
 
-  //fields authcode & gamename need getters and setters
-  //they are nullable fields and are expected to change with every user
+  // Getter and setter for the authentication  key
   public String getAuthKey() {
     return authKey;
   }
@@ -46,10 +48,7 @@ public class User {
     this.authKey = authCode;
   }
 
-  public UUID getExternalKey() {
-    return externalKey;
-  }
-
+  // Getter and setter for the display name
   public String getDisplayName() {
     return displayName;
   }
@@ -58,6 +57,7 @@ public class User {
     this.displayName = gameName;
   }
 
+  // Method to generate a unique external key before persisting the entity
   @PrePersist
   void generateFieldValues() {
     externalKey = UUID.randomUUID();
