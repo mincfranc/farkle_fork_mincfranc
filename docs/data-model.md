@@ -1,6 +1,6 @@
 ---
-title: Data Mddel
-description: Class idagrams, ERDs, links to source.
+title: Data Model
+description: Class Diagrams, ERDs, links to source.
 order: 10
 ---
 
@@ -14,4 +14,4 @@ order: 10
 
 ## Data Definition Language (DDL) for Server Model
 
-{% include type="sql" file="sql/ddl-server.sql" %}
+{% include linked-file.md type='sql' file='sql/ddl-server.sql' %}
