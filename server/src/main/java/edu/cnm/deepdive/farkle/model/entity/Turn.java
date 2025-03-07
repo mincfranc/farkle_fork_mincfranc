@@ -8,7 +8,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 
 @Entity
 public class Turn {
@@ -16,7 +15,7 @@ public class Turn {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)  // Primary key auto-generated
   @Column(name = "turn_id")  // Column name as per ERD
-  private Long turnId;
+  private Long Id;
 
   @Column(nullable = false)
   private Integer turnScore;
@@ -31,8 +30,8 @@ public class Turn {
   //Constructor
 
   // Getters and Setters
-  private Long getTurnId() {
-    return turnId;
+  private Long getId() {
+    return Id;
   }
 
 

@@ -1,9 +1,14 @@
 package edu.cnm.deepdive.farkle.model.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import java.util.List;
 
 @Entity
-@Table()
 public class ScoreMaster {
 
   @Id
@@ -14,8 +19,13 @@ public class ScoreMaster {
   @Column(nullable = true)
   private Integer bankScore;
 
+  @ElementCollection
+  private List<Integer> diceValues;
+
   //Getters & Setters
-  public Long getId() {return Id;}
+  public Long getId() {
+    return Id;
+  }
 
   public Integer getBankScore() {
     return bankScore;
@@ -24,5 +34,14 @@ public class ScoreMaster {
   public void setBankScore(Integer bankScore) {
     this.bankScore = bankScore;
   }
+
+  public List<Integer> getDiceValues() {
+    return diceValues;
+  }
+
+  public void setDiceValues(List<Integer> diceValues) {
+    this.diceValues = diceValues;
+  }
+
 
 }
