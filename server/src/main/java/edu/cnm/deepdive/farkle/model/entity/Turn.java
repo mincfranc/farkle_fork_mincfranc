@@ -34,7 +34,6 @@ public class Turn {
     return Id;
   }
 
-
   public Integer getTurnScore() {
     return turnScore;
   }
