@@ -11,43 +11,43 @@ public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "user_profile_id", nullable = false)
-  private Long userId;
+  private Long Id;
 
   @Column(nullable = false, updatable = false, unique = true)
   @JsonProperty(value = "key", access = JsonProperty.Access.READ_ONLY)
   private UUID externalKey;
 
-  @Column(name = "auth_code", nullable = false, unique = true) //JPA defaults to nullable
-  private String authCode;
+  @Column(nullable = true)
+  private String authKey;
 
-  @Column(name = "game_name", nullable = false, unique = true)
-  private String gameName;
+  @Column(nullable = true)
+  private String displayName;
 
   // Getters & Setters
   //"userId" Needs a getter for retrieval of data
   //"userId" does not need setters. It is an immutable field & a primary key, set once and should not be modified.
-  public Long getUserId() {return userId;}
+  public Long getId() {return Id;}
 
-  //fields oauthcode & gamename need getters and setters
+  //fields authcode & gamename need getters and setters
   //they are nullable fields and are expected to change with every user
-  public String getAuthCode() {
-    return authCode;
+  public String getAuthKey() {
+    return authKey;
   }
 
   public UUID getExternalKey() {
     return externalKey;
   }
 
-  public void setAuthCode(String authCode) {
-    this.authCode = authCode;
+  public void setAuthKey(String authCode) {
+    this.authKey = authCode;
   }
 
-  public String getGameName() {
-    return gameName;
+  public String getDisplayName() {
+    return displayName;
   }
 
-  public void setGameName(String gameName) {
-    this.gameName = gameName;
+  public void setDisplayName(String gameName) {
+    this.displayName = gameName;
   }
 
 

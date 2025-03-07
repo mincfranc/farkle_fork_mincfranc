@@ -31,12 +31,12 @@ public class UserService implements AbstractUserService {
   }
 
   @Override
-  public User getOrCreate(String oauthKey, String displayName) {
+  public User getOrCreate(String authKey, String displayName) {
     return userRepository
-        .findByOauthKey(oauthKey)
+        .findByAuthKey(authKey)
         .orElseGet(() -> {
           User user = new User();
-          user.setOauthKey(oauthKey);
+          user.setAuthKey(authKey);
           user.setDisplayName(displayName);
           // TODO: 3/5/25 Set avatar.
           return userRepository.save(user);
@@ -51,10 +51,6 @@ public class UserService implements AbstractUserService {
           String displayName = user.getDisplayName();
           if (displayName != null) {
             u.setDisplayName(displayName);
-          }
-          URL avatar = user.getAvatar();
-          if (avatar != null) {
-            u.setAvatar(avatar);
           }
           return userRepository.save(u);
         })

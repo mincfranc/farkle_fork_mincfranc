@@ -2,6 +2,7 @@ package edu.cnm.deepdive.farkle.model.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -10,7 +11,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "turn")  // Matches table name from ERD
 public class Turn {
 
   @Id
@@ -18,13 +18,14 @@ public class Turn {
   @Column(name = "turn_id")  // Column name as per ERD
   private Long turnId;
 
-  @Column(name = "turn_score", nullable = false)
+  @Column(nullable = false)
   private Integer turnScore;
 
-  @Column(name = "finished", nullable = false)
+  @Column(nullable = false)
   private Boolean finished;
 
-  @ManyToOne (optional = false)
+  @ManyToOne (optional = false, fetch = FetchType.LAZY)
+  @JoinColumn(name = "game_id", nullable = false, updatable = false)
   private Game game;
 
   //Constructor

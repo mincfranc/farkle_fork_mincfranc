@@ -1,23 +1,21 @@
 package edu.cnm.deepdive.farkle.model.entity;
 
 import jakarta.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
-@Table(name = "score_master")
+@Table()
 public class ScoreMaster {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "scoreid")
-  private Long scoreId;
+  @Column(name = "score_id")
+  private Long Id;
 
-  @Column(name = "bankscore", nullable = true)
+  @Column(nullable = true)
   private Integer bankScore;
 
   //Getters & Setters
-  public Long getScoreId() {return scoreId;}
+  public Long getId() {return Id;}
 
   public Integer getBankScore() {
     return bankScore;
