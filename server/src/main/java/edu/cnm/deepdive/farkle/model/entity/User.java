@@ -1,43 +1,61 @@
 package edu.cnm.deepdive.farkle.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import java.util.UUID;
 
 @Entity
-@Table(name = "user")
+@Table(name = "user_profile")
 public class User {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "userid")
-  private Long userId;
+  @Column(name = "user_profile_id", nullable = false)
+  private Long Id;
 
   @Column(nullable = false, updatable = false, unique = true)
   @JsonProperty(value = "key", access = JsonProperty.Access.READ_ONLY)
   private UUID externalKey;
 
-  @Column(name = "oauthcode", nullable = false, unique = true) //JPA defaults to nullable
-  private String oauthCode;
+  @Column(nullable = true)
+  private String authKey;
 
-  @Column(name = "gamename", nullable = false, unique = true)
-  private String gameName;
+  @Column(nullable = true)
+  private String displayName;
 
   // Getters & Setters
   //"userId" Needs a getter for retrieval of data
   //"userId" does not need setters. It is an immutable field & a primary key, set once and should not be modified.
-  public Long getUserId() {return userId;}
+  public Long getId() {
+    return Id;
+  }
 
-  //fields oauthcode & gamename need getters and setters
+  //fields authcode & gamename need getters and setters
   //they are nullable fields and are expected to change with every user
+  public String getAuthKey() {
+    return authKey;
+  }
 
-  public String getOauthCode() {return oauthCode;}
+  public void setAuthKey(String authCode) {
+    this.authKey = authCode;
+  }
 
-  public void setOauthCode(String oauthCode) {this.oauthCode = oauthCode;}
+  public UUID getExternalKey() {
+    return externalKey;
+  }
+
+  public String getDisplayName() {
+    return displayName;
+  }
+
+  public void setDisplayName(String gameName) {
+    this.displayName = gameName;
+  }
 
 
-  public String getGameName() {return gameName;}
-
-  public void setGameName(String gameName) {this.gameName = gameName;}
-  
 }

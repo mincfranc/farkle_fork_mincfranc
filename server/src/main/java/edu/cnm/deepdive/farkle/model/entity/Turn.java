@@ -2,38 +2,37 @@ package edu.cnm.deepdive.farkle.model.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "turn")  // Matches table name from ERD
 public class Turn {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)  // Primary key auto-generated
   @Column(name = "turn_id")  // Column name as per ERD
-  private Long turnId;
+  private Long Id;
 
-  @Column(name = "turn_score", nullable = false)
+  @Column(nullable = false)
   private Integer turnScore;
 
-  @Column(name = "finished", nullable = false)
+  @Column(nullable = false)
   private Boolean finished;
 
-  @ManyToOne (optional = false)
+  @ManyToOne (optional = false, fetch = FetchType.LAZY)
+  @JoinColumn(name = "game_id", nullable = false, updatable = false)
   private Game game;
 
   //Constructor
 
   // Getters and Setters
-  public Long getTurnId() {
-    return turnId;
+  private Long getId() {
+    return Id;
   }
-
 
 
   public Integer getTurnScore() {
@@ -57,5 +56,10 @@ public class Turn {
   public Game getGame() {return game;}
 
   public void setGame(Game game) {this.game = game;}
+
+  // TODO: 3/7/25  correct rolls field & getter/setter
+//  @OneToMany
+//  private List<Roll> rolls;
+
 
 }
