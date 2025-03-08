@@ -1,11 +1,17 @@
 package edu.cnm.deepdive.farkle.model.entity;
 
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Embeddable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import java.util.LinkedList;
 import java.util.List;
 
 @Entity
@@ -21,17 +27,19 @@ public class Roll {
   private Integer rollScore;
 
   // Flag indicating if the roll is a farkle
-  @Column(nullable = true)
-  private Boolean farkle;
+  @Column(nullable = false, updatable = false)
+  private boolean farkle;
 
-  // List of number of dice
-  @ElementCollection
-  private List<Integer> numberDice;
-  // TODO: 3/7/25 check with nick about these two list fields 
+  @Column(nullable = false, updatable = false)
+  private int numberDice;
 
   // List of dice values
   @ElementCollection
-  private List<Integer> diceValues;
+  @CollectionTable(name = "roll_die", joinColumns = @JoinColumn(name = "roll_id"))
+  @AttributeOverrides(
+      @AttributeOverride(name=  "value", column = @Column(name = "face_value", nullable = false, updatable = false))
+  )
+  private final List<Die> dice = new LinkedList<>();
 
   //Getters and Setters
   public Long getId() {
@@ -46,27 +54,29 @@ public class Roll {
     this.rollScore = rollScore;
   }
 
-  public Boolean getFarkle() {
-    return farkle;
-  }
-
-  public void setFarkle(Boolean farkle) {
-    this.farkle = farkle;
-  }
-
-  public List<Integer> getNumberDice() {
+  public int getNumberDice() {
     return numberDice;
   }
 
-  public void setNumberDice(List<Integer> numberDice) {
+  public void setNumberDice(int numberDice) {
     this.numberDice = numberDice;
   }
 
-  public List<Integer> getDiceValues() {
-    return diceValues;
+  public List<Die> getDice() {
+    return dice;
   }
 
-  public void setDiceValues(List<Integer> diceValues) {
-    this.diceValues = diceValues;
+  @Embeddable
+  public static class Die {
+
+    private int value;
+
+    public int getValue() {
+      return value;
+    }
+
+    public void setValue(int value) {
+      this.value = value;
+    }
   }
 }
