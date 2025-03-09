@@ -6,7 +6,7 @@ order: 10
 
 ## UML class diagram
 
-[![UML class diagram](assets/img/farkle.svg)](assets/pdf/farkle.pdf)
+[![UML class diagram](assets/img/uml.svg)](assets/pdf/uml.pdf)
 
 ## Entity-Relationship Diagram
 
