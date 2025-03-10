@@ -13,5 +13,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TurnRepository extends JpaRepository<Turn, Long> {
 
-  List<Turn> findByGame(Game game);
+//  List<Turn> findByGame(Game game);
 }
