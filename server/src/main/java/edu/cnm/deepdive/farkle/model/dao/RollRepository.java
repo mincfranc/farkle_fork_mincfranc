@@ -13,5 +13,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RollRepository extends JpaRepository<Roll, Long> {
 
-  List<Roll> findByTurn(Turn turn);
+  // List<Roll> findByTurn(Turn turn);
 }
