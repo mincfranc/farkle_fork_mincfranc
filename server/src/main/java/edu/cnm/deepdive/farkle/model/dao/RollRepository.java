@@ -1,6 +1,7 @@
 package edu.cnm.deepdive.farkle.model.dao;
 
 import edu.cnm.deepdive.farkle.model.entity.Roll;
+import edu.cnm.deepdive.farkle.model.entity.Turn;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -12,4 +13,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RollRepository extends JpaRepository<Roll, Long> {
 
+  List<Roll> findByTurn(Turn turn);
 }
