@@ -14,7 +14,7 @@ public class Turn {
 
   // Primary key field
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue
   @Column(name = "turn_id")
   private Long Id;
 
@@ -62,9 +62,6 @@ public class Turn {
     this.game = game;
   }
 
-  // TODO: 3/7/25  correct rolls field & getter/setter
-//  @OneToMany
-//  private List<Roll> rolls;
 
 
 }

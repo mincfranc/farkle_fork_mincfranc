@@ -18,7 +18,7 @@ import java.util.List;
 public class Roll {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue
   @Column(name = "roll_id")
   private Long Id;
 
