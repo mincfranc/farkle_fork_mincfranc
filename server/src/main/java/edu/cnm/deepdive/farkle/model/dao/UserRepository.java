@@ -1,17 +1,15 @@
 package edu.cnm.deepdive.farkle.model.dao;
 
-import edu.cnm.deepdive.farkle.model.entity.User;
-import java.util.List;
+import edu.cnm.deepdive.farkle.model.entity.UserProfile;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
-public interface UserRepository extends JpaRepository<User,Long> {
+public interface UserRepository extends JpaRepository<UserProfile,Long> {
 
-  Optional<User> findByAuthKey(String authKey);
+  Optional<UserProfile> findByAuthKey(String authKey);
 
-  Optional<User> findByExternalKey(UUID externalKey);
+  Optional<UserProfile> findByExternalKey(UUID externalKey);
 
 
 }

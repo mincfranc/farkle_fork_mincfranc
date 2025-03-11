@@ -8,7 +8,6 @@ import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import java.util.LinkedList;
@@ -22,18 +21,15 @@ public class Roll {
   @Column(name = "roll_id")
   private Long Id;
 
-  // Score for the roll
   @Column(nullable = true)
-  private Integer rollScore;
+  private int rollScore;
 
-  // Flag indicating if the roll is a farkle
   @Column(nullable = false, updatable = false)
   private boolean farkle;
 
   @Column(nullable = false, updatable = false)
   private int numberDice;
 
-  // List of dice values
   @ElementCollection
   @CollectionTable(name = "roll_die", joinColumns = @JoinColumn(name = "roll_id"))
   @AttributeOverrides(
@@ -41,7 +37,6 @@ public class Roll {
   )
   private final List<Die> dice = new LinkedList<>();
 
-  //Getters and Setters
   public Long getId() {
     return Id;
   }
@@ -79,4 +74,5 @@ public class Roll {
       this.value = value;
     }
   }
+
 }

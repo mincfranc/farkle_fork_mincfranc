@@ -1,8 +1,7 @@
 package edu.cnm.deepdive.farkle.service;
 
 import edu.cnm.deepdive.farkle.model.dao.UserRepository;
-import edu.cnm.deepdive.farkle.model.entity.User;
-import java.net.URL;
+import edu.cnm.deepdive.farkle.model.entity.UserProfile;
 import java.util.UUID;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -17,25 +16,25 @@ public class UserService implements AbstractUserService {
   }
 
   @Override
-  public User getCurrent() {
-    return (User) SecurityContextHolder.getContext()
+  public UserProfile getCurrent() {
+    return (UserProfile) SecurityContextHolder.getContext()
         .getAuthentication()
         .getPrincipal();
   }
 
   @Override
-  public User get(UUID externalKey) {
+  public UserProfile get(UUID externalKey) {
     return userRepository
         .findByExternalKey(externalKey)
         .orElseThrow();
   }
 
   @Override
-  public User getOrCreate(String authKey, String displayName) {
+  public UserProfile getOrCreate(String authKey, String displayName) {
     return userRepository
         .findByAuthKey(authKey)
         .orElseGet(() -> {
-          User user = new User();
+          UserProfile user = new UserProfile();
           user.setAuthKey(authKey);
           user.setDisplayName(displayName);
           // TODO: 3/5/25 Set avatar.
@@ -44,7 +43,7 @@ public class UserService implements AbstractUserService {
   }
 
   @Override
-  public User update(User user) {
+  public UserProfile update(UserProfile user) {
     return userRepository
         .findById(getCurrent().getId())
         .map((u) -> {
