@@ -1,16 +1,16 @@
 package edu.cnm.deepdive.farkle.service;
 
-import edu.cnm.deepdive.farkle.model.entity.User;
+import edu.cnm.deepdive.farkle.model.entity.UserProfile;
 import java.util.UUID;
 
 public interface AbstractUserService {
 
-  User getCurrent();
+  UserProfile getCurrent();
 
-  User get(UUID externalKey);
+  UserProfile get(UUID externalKey);
 
-  User getOrCreate(String oauthKey, String displayName);
+  UserProfile getOrCreate(String oauthKey, String displayName);
 
-  User update(User user);
+  UserProfile update(UserProfile user);
 
 }

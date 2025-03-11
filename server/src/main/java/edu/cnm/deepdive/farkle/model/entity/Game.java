@@ -7,7 +7,6 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -23,35 +22,29 @@ public class Game {
   @Column(name = "game_id", nullable = false)
   private Long Id;
 
-  // Reference to the current player
   @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "user_profile_id", nullable = false)
-  private User currentPlayer;
+  @JoinColumn(name = "current_player", nullable = false)
+  private UserProfile currentPlayer;
 
-  // Reference to the current turn
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "turn_id", nullable = true)
   private Turn currentTurn;
 
-  // Reference to the winner
   @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "user_profile_id", nullable = true, insertable = false, updatable = false)
-  private User winner;
+  @JoinColumn(name = "winner_id", nullable = true, insertable = false, updatable = false)
+  private UserProfile winner;
 
-  // State of the game
   @Enumerated(EnumType.STRING)
   private State state;
 
-  // List of turns
   @OneToMany(mappedBy = "game", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
   private final List<Turn> turns = new LinkedList<>();
 
-  // Getters and Setters
   public Long getId() {
     return Id;
   }
 
-  public User getCurrentPlayer() {
+  public UserProfile getCurrentPlayer() {
     return currentPlayer;
   }
 
@@ -63,11 +56,11 @@ public class Game {
     this.currentTurn = currentTurn;
   }
 
-  public User getWinner() {
+  public UserProfile getWinner() {
     return winner;
   }
 
-  public void setWinner(User winner) {
+  public void setWinner(UserProfile winner) {
     this.winner = winner;
   }
 
@@ -78,11 +71,6 @@ public class Game {
   public void setState(State state) {
     this.state = state;
   }
-
-// TODO: 3/7/25 Correct players field & add getter/setter
-  // @ManyToMany
-//  private List<UserProfile> players;
-
 
 }
 
