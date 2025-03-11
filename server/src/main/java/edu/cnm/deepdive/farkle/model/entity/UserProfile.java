@@ -42,6 +42,10 @@ public class UserProfile {
     return authKey;
   }
 
+  public void setAuthKey(String authKey) {
+    this.authKey = authKey;
+  }
+
   public String getDisplayName() {
     return displayName;
   }

@@ -4,10 +4,11 @@ create sequence turn_seq start with 1 increment by 50;
 create sequence user_profile_seq start with 1 increment by 50;
 create table game
 (
-    game_id         bigint not null,
-    turn_id         bigint,
-    user_profile_id bigint not null,
-    state           enum ('FINISHED','IN_PLAY','PRE_GAME'),
+    current_player bigint not null,
+    game_id        bigint not null,
+    turn_id        bigint,
+    winner_id      bigint,
+    state          enum ('FINISHED','IN_PLAY','PRE_GAME'),
     primary key (game_id)
 );
 create table roll
@@ -40,9 +41,11 @@ create table user_profile
     primary key (user_profile_id)
 );
 alter table if exists game
-    add constraint FK8ygyvq2bfg7wsdrv08jgxhgld foreign key (user_profile_id) references user_profile;
+    add constraint FK9ym15aot52ci94reubxtv5tjb foreign key (current_player) references user_profile;
 alter table if exists game
     add constraint FKoaji90cp43q1p2v8u82lg76fg foreign key (turn_id) references turn;
+alter table if exists game
+    add constraint FKn7s1942q5h1109lb8houdtbai foreign key (winner_id) references user_profile;
 alter table if exists roll_die
     add constraint FK27uspo9bf2ahsy3dknypc02hs foreign key (roll_id) references roll;
 alter table if exists turn
