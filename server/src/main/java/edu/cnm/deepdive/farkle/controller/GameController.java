@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class GameController {
 
   private final AbstractGameService gameService;
-  private final AbstractUserService userService;
+  private final AbstractUserService userService; // TODO: 3/20/25 Add this to other controllers
 
   @Autowired
   public GameController(AbstractGameService gameService, AbstractUserService userService) {
@@ -24,8 +24,8 @@ public class GameController {
   }
 
   @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public Game post(){ // Does this need User or UUID?
-    return gameService.startOrJoin();
+  public Game post(){
+    return gameService.startOrJoin(userService.getCurrent());
   }
 
 
