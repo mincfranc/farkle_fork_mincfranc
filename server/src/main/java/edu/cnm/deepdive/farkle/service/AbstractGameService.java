@@ -5,6 +5,8 @@ import edu.cnm.deepdive.farkle.model.entity.State;
 
 public interface AbstractGameService {
 
+  Game startOrJoin();
+
   Game getGame();
 
   Game setGame(Game game);
