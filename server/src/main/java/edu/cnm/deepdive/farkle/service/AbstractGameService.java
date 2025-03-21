@@ -16,5 +16,7 @@ public interface AbstractGameService {
 
   Game getCurrentPlayer();
 
-
+//  Game createPlayerOrder(List<User> playOrder);
+//  get all players, decide player turn order, choose player 1
+  
 }

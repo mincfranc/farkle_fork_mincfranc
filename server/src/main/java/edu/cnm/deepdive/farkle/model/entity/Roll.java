@@ -7,9 +7,11 @@ import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -29,6 +31,11 @@ public class Roll {
 
   @Column(nullable = false, updatable = false)
   private int numberDice;
+
+  // TODO: 3/20/25 Add a relationship to turn
+  @JoinColumn(nullable = false, updatable = false)
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  private Turn turn;
 
   @ElementCollection
   @CollectionTable(name = "roll_die", joinColumns = @JoinColumn(name = "roll_id"))
