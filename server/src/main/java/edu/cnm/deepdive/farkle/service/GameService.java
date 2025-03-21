@@ -45,7 +45,7 @@ public class GameService implements AbstractGameService {
   @Override
   public void freezeOrContinue(RollAction action, UUID key, User user) {
 
-    // TODO: 3/21/25 Query game object with key and User 
+    // TODO: 3/21/25 Query game object with key and User
     // TODO: 3/21/25 Look at most recent turn and most recent roll in game object
     // TODO: 3/21/25 Validate whether the user IS the current user in turn
     // TODO: 3/21/25 Validate what the user wants to do is valid according to the most recent roll
