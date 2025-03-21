@@ -10,7 +10,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OrderBy;
 import jakarta.persistence.PrePersist;
+import java.time.Instant;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.UUID;
 
 @SuppressWarnings("JpaDataSourceORMInspection")
@@ -31,16 +36,21 @@ public class Turn {
   @JsonProperty(access = Access.READ_ONLY)
   private int turnScore;
 
+  @Column(nullable = false)
+  @JsonProperty(access = Access.READ_ONLY)
+  private Instant startTime;
 
-  @JoinColumn(nullable = false)
-  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "user_id", nullable = false, updatable = false)
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
   private User user;
-  // TODO: 3/20/25 Add player who took turn
-  // TODO: 3/20/25 Consider adding timestamp
 
   @Column(nullable = false)
   @JsonProperty(access = Access.READ_ONLY)
   private boolean finished;
+
+  @OneToMany(mappedBy = "turn", fetch = FetchType.EAGER)
+  @OrderBy("timestamp desc")
+  private final List<Roll> rolls = new LinkedList<>();
 
   @ManyToOne(optional = false, fetch = FetchType.LAZY)
   @JoinColumn(name = "game_id", nullable = false, updatable = false)
@@ -53,6 +63,10 @@ public class Turn {
 
   public UUID getExternalKey() {
     return externalKey;
+  }
+
+  public boolean isFarkle(){
+    return rolls.stream().anyMatch(Roll::isFarkle);
   }
 
   public int getTurnScore() {
