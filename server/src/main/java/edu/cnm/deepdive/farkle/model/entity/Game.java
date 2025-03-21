@@ -39,17 +39,17 @@ public class Game {
   @JsonProperty(value = "key", access = Access.READ_ONLY)
   private UUID externalKey;
 
-  @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "current_player_id", nullable = false)
+  @ManyToOne(fetch = FetchType.EAGER, optional = true)
+  @JoinColumn(name = "current_player_id")
   @JsonProperty(access = Access.READ_ONLY)
   private User currentPlayer;
 
-  @ManyToOne(fetch = FetchType.EAGER)
+  @ManyToOne(fetch = FetchType.EAGER, optional = true)
   @JoinColumn(name = "turn_id", nullable = true)
   @JsonProperty(access = Access.READ_ONLY)
   private Turn currentTurn;
 
-  @ManyToOne(fetch = FetchType.EAGER)
+  @ManyToOne(fetch = FetchType.EAGER, optional = true)
   @JoinColumn(name = "winner_id", nullable = true, insertable = false, updatable = false)
   @JsonProperty(access = Access.READ_ONLY)
   private User winner;
@@ -63,7 +63,7 @@ public class Game {
   @JsonIgnore
   private final List<Turn> turns = new LinkedList<>();
 
-  @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+  @ManyToMany(fetch = FetchType.EAGER, cascade = {})
   @JoinTable(name = "game_player",
       joinColumns = @JoinColumn(name = "game_id"),
       inverseJoinColumns = @JoinColumn(name = "player_id"),
