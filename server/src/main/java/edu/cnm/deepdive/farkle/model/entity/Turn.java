@@ -31,8 +31,14 @@ public class Turn {
   @JsonProperty(access = Access.READ_ONLY)
   private int turnScore;
 
-  // TODO: 3/20/25 Add player who took turn
   // TODO: 3/20/25 Consider adding timestamp
+
+  // TODO: 3/20/25 Add relationship to roll(?)
+
+  @JoinColumn(nullable = false)
+  @ManyToOne(fetch = FetchType.LAZY)
+  private User user;
+  // Add player who took turn
 
   @Column(nullable = false)
   @JsonProperty(access = Access.READ_ONLY)
