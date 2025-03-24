@@ -3,6 +3,7 @@ package edu.cnm.deepdive.farkle.model.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -13,10 +14,13 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OrderBy;
 import jakarta.persistence.PrePersist;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import java.time.Instant;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
+import org.hibernate.annotations.CreationTimestamp;
 
 @SuppressWarnings("JpaDataSourceORMInspection")
 @Entity
@@ -38,17 +42,21 @@ public class Turn {
 
   @Column(nullable = false)
   @JsonProperty(access = Access.READ_ONLY)
+  @CreationTimestamp
+  @Temporal(TemporalType.TIMESTAMP)
   private Instant startTime;
 
   @JoinColumn(name = "user_id", nullable = false, updatable = false)
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   private User user;
+  // TODO: 3/20/25 Add player who took turn
+  // TODO: 3/20/25 Consider adding timestamp
 
   @Column(nullable = false)
   @JsonProperty(access = Access.READ_ONLY)
   private boolean finished;
 
-  @OneToMany(mappedBy = "turn", fetch = FetchType.EAGER)
+  @OneToMany(mappedBy = "turn", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
   @OrderBy("timestamp desc")
   private final List<Roll> rolls = new LinkedList<>();
 
@@ -83,6 +91,22 @@ public class Turn {
 
   public void setFinished(boolean finished) {
     this.finished = finished;
+  }
+
+  public List<Roll> getRolls() {
+    return rolls;
+  }
+
+  public User getUser() {
+    return user;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
+  }
+
+  public Instant getStartTime() {
+    return startTime;
   }
 
   public Game getGame() {

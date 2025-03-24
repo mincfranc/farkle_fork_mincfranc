@@ -64,7 +64,7 @@ public class GameService implements AbstractGameService {
           List<Die> dice = new LinkedList<>(currentRoll.getDice());
           for(int[] group : action.getFrozenGroups()) {
             // TODO: 3/24/2025 check int array to make sure group is valid for scoring and get score of that group
-            int score = 0; // FIXME: 3/24/2025 use the score returned by the scoring table
+            int score = 0; // FIXME: 3/24/2025 use the score returned bu the scoring table
             VALUE_LOOP:
             for(int value : group) {
               for (Iterator<Die> iterator = dice.iterator(); iterator.hasNext(); ) {
