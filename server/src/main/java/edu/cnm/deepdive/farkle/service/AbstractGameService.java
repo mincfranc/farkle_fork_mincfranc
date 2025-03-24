@@ -20,7 +20,4 @@ public interface AbstractGameService {
 
   void freezeOrContinue(RollAction action, UUID key, User user);
 
-//  Game createPlayerOrder(List<User> playOrder);
-//  get all players, decide player turn order, choose player 1
-
 }
