@@ -89,10 +89,6 @@ public class Game {
     this.currentPlayer = currentPlayer;
   }
 
-  public List<Turn> getTurns() {
-    return turns;
-  }
-
   public Turn getCurrentTurn() {
     return currentTurn;
   }

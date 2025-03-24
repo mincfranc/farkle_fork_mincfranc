@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Configuration;
 public class Beans {
 
   @Bean
-  public RandomGenerator provideRng() {
   public RandomGenerator provideRandomGenerator() {
     return RandomGenerator.getDefault();
   }
