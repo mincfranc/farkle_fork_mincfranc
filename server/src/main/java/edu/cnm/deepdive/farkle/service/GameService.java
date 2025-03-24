@@ -35,6 +35,7 @@ public class GameService implements AbstractGameService {
               players.add(user);
               game.setCurrentPlayer(players.getFirst());
               // TODO: 3/20/25 Need to figure out how to create turn and roll dice first time.
+              Turn turn = new Turn();
               return gameRepository.save(game);
             })
             .orElseGet(() -> {
@@ -90,7 +91,6 @@ public class GameService implements AbstractGameService {
   public Game getCurrentPlayer() {
     return null;
   }
-}
 
 //  private Game setCurrentPlayer() { return CurrentPlayer }
 //  cycle through players via turn order,
