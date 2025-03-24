@@ -37,7 +37,7 @@ public class GameService implements AbstractGameService {
               game.setState(State.IN_PLAY);
               List<User> players = game.getPlayers();
               players.add(user);
-              game.setCurrentPlayer(startNewTurn(game, null)); // TODO: 3/24/25 Evaluate the neccessity
+              game.setCurrentPlayer(startNewTurn(game, null)); // TODO: 3/24/2025 evalute whether necessary
               return gameRepository.save(game);
             })
             .orElseGet(() -> {
@@ -48,6 +48,8 @@ public class GameService implements AbstractGameService {
             })
         );
   }
+
+
 
   @Override
   public void freezeOrContinue(RollAction action, UUID key, User user) {
@@ -61,13 +63,12 @@ public class GameService implements AbstractGameService {
           }
           List<Die> dice = new LinkedList<>(currentRoll.getDice());
           for(int[] group : action.getFrozenGroups()) {
-            // TODO: 3/24/25 Check the int[] to make sure it is valid for scoring and get score
-            //  (look into using map that takes list as a key)
-            int score = 0; // FIXME: 3/24/25 use the score returned by the scoring table
+            // TODO: 3/24/2025 check int array to make sure group is valid for scoring and get score of that group
+            int score = 0; // FIXME: 3/24/2025 use the score returned bu the scoring table
             VALUE_LOOP:
-            for (int faceValue : group) {
+            for(int value : group) {
               for (Iterator<Die> iterator = dice.iterator(); iterator.hasNext(); ) {
-                if (iterator.next().getValue() == faceValue) {
+                if (iterator.next().getValue() == value) {
                   iterator.remove();
                   continue VALUE_LOOP;
                 }
@@ -75,15 +76,15 @@ public class GameService implements AbstractGameService {
               throw new IllegalArgumentException();
             }
           }
-          if (dice.isEmpty() || action.isFinished()) {
-            // FIXME: 3/24/25 add conditions to verify that the user is allowed to end turn
+          if (dice.isEmpty() || action.isFinished()) { // FIXME: 3/24/2025 add conditions to verify allowed to end turn
             User nextPlayer = startNewTurn(game, user);
-            game.setCurrentPlayer(nextPlayer); // TODO: 3/24/25 Evaluate whether we really need this.
+            game.setCurrentPlayer(nextPlayer); // TODO: 3/24/2025 evaluate whether we really need this
           } else {
             addRoll(currentTurn, dice.size());
           }
           return gameRepository.save(game);
         })
+
         .orElseThrow();
 
     // TOD 3/21/25 Query game object with key and User
@@ -120,7 +121,7 @@ public class GameService implements AbstractGameService {
     Turn turn = new Turn();
     User nextPlayer;
     List<User> players = game.getPlayers();
-    if (currentPlayer == null) {
+    if(currentPlayer == null) {
       nextPlayer = players.getFirst();
     } else {
       int position = players.indexOf(currentPlayer);
@@ -145,7 +146,6 @@ public class GameService implements AbstractGameService {
       roll.getDice().add(die);
     }
   }
-
 }
 
 //  private Game setCurrentPlayer() { return CurrentPlayer }

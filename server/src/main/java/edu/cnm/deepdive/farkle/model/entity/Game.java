@@ -117,6 +117,9 @@ public class Game {
     this.state = state;
   }
 
+  public List<Turn> getTurns() {
+    return turns;
+  }
 
   public List<User> getPlayers() {
     return players;

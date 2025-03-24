@@ -16,7 +16,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
-import jakarta.persistence.criteria.CriteriaBuilder.In;
 import java.time.Instant;
 import java.util.LinkedList;
 import java.util.List;
@@ -126,10 +125,10 @@ public class Roll {
     @Override
     public boolean equals(Object obj) {
       boolean result;
-      if (this == obj) {
+      if(this == obj) {
         result = true;
       } else if (obj instanceof Die other) {
-        result = this.value == other.value;
+        result = other.value == this.value;
       } else {
         result = false;
       }
@@ -141,4 +140,5 @@ public class Roll {
       return Integer.hashCode(value);
     }
   }
+
 }

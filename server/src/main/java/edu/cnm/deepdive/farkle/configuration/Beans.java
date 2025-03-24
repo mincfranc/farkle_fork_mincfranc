@@ -10,6 +10,7 @@ public class Beans {
 
   @Bean
   public RandomGenerator provideRng() {
+  public RandomGenerator provideRandomGenerator() {
     return RandomGenerator.getDefault();
   }
 
