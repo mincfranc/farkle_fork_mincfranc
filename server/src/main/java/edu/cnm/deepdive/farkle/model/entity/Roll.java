@@ -16,6 +16,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.persistence.criteria.CriteriaBuilder.In;
 import java.time.Instant;
 import java.util.LinkedList;
 import java.util.List;
@@ -121,6 +122,23 @@ public class Roll {
     public void setGroup(int group) {
       this.group = group;
     }
-  }
 
+    @Override
+    public boolean equals(Object obj) {
+      boolean result;
+      if (this == obj) {
+        result = true;
+      } else if (obj instanceof Die other) {
+        result = this.value == other.value;
+      } else {
+        result = false;
+      }
+      return super.equals(obj);
+    }
+
+    @Override
+    public int hashCode() {
+      return Integer.hashCode(value);
+    }
+  }
 }
