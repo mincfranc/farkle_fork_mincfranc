@@ -23,22 +23,21 @@ play through a web service (with time limits to keep games moving).
 **Startup**
 
 Login: Choose a display name on first play, with option to change later
-
-Start a game session
-
-Watch other players' turns on screen while waiting for your turn
-
-Take your turn: Roll dice, select scoring combinations, bank points (or Farkle)
-
-Continue rounds until someone reaches the winning score
-
-View post-game summary showing winner and point rankings
-
 Settings screen
-- Select score goal (10,000, 15,000, etc.) (game)
-- Day/night theme (user)
+    - Select score goal (10,000, 15,000, etc.) (game)
+    - Day/night theme (user)
+    - Start a game session
 
-Help screen with Farkle rules and scoring guide
+**In-Game**
+  - Watch other players' turns on screen while waiting for your turn
+
+  - Take your turn: Roll dice, select scoring combinations, bank points (or Farkle)
+
+  - Continue rounds until someone reaches the winning score
+
+  - View post-game summary showing winner and point rankings
+
+    - (optional) Help screen with Farkle rules and scoring guide
 
 ### Gameplay challenges/fun
 
@@ -59,15 +58,24 @@ to the next player after the previous player completes.
 
 ### User Stories
 
-#### People who enjoy classic games
+#### People who enjoy classic games can now play them remotely with friends using this new mobile interface
 
-As someone who enjoys classic games, I would like to use the Farkle app to play a game of Farkle
+As someone who enjoys classic games, I would like to use the Farkle app to play a game of Farkle with my children who 
+moved away for college
 
-#### People who want to play with others and see their game data
+#### People of mixed experience levels want to play with others and see their game data
 
-As a new player, I want to create a display name upon first login so that I can be identified in multiplayer games.
-As a returning player, I want to log in with my existing credentials so that I can continue playing with my saved settings.
-As a player, I want to see my stats and performance history so that I can track my improvements over time.
+As a player, I want to create a display name upon first login so that I can be identified in multiplayer games.
+I want to see my stats and performance history so that I can track my improvements over time, I can also 
+tell who is the most experienced player in a group or has the best win ratio and I can learn from their technique
+
+#### People of mixed experience levels want to play with others and see their game data
+
+As a returning player, I am not just here to play for a little fun, I have a reputation! I want to log in
+with my existing credentials so that I can continue playing with my saved settings and the psychological advantage 
+I have over the weaklings who I have previously destroyed.
+I want to see my stats and performance history so that I can track my improvements over time, and develop mastery
+over the Wor- Farkle, over Farkle of course.
 
 ## Persistent data
 
