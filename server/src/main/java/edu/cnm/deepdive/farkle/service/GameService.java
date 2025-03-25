@@ -54,9 +54,24 @@ public class GameService implements AbstractGameService {
       Map.entry(List.of(6, 6, 6, 6, 6, 6), 3000),
       Map.entry(List.of(1, 2, 3, 4, 5, 6), 1500),
       Map.entry(List.of(1, 1, 2, 2, 3, 3), 1500),
-      // TODO: 3/24/25 Finish scoring list for combos
+      Map.entry(List.of(1, 1, 2, 2, 4, 4), 1500),
+      Map.entry(List.of(1, 1, 2, 2, 5, 5), 1500),
+      Map.entry(List.of(1, 1, 2, 2, 6, 6), 1500),
+      Map.entry(List.of(1, 1, 3, 3, 4, 4), 1500),
+      Map.entry(List.of(1, 1, 3, 3, 5, 5), 1500),
+      Map.entry(List.of(1, 1, 3, 3, 6, 6), 1500),
+      Map.entry(List.of(1, 1, 4, 4, 5, 5), 1500),
+      Map.entry(List.of(1, 1, 4, 4, 6, 6), 1500),
+      Map.entry(List.of(1, 1, 5, 5, 6, 6), 1500),
       Map.entry(List.of(2, 2, 3, 3, 4, 4), 1500),
+      Map.entry(List.of(2, 2, 3, 3, 5, 5), 1500),
+      Map.entry(List.of(2, 2, 3, 3, 6, 6), 1500),
+      Map.entry(List.of(2, 2, 4, 4, 5, 5), 1500),
+      Map.entry(List.of(2, 2, 4, 4, 6, 6), 1500),
+      Map.entry(List.of(2, 2, 5, 5, 6, 6), 1500),
       Map.entry(List.of(3, 3, 4, 4, 5, 5), 1500),
+      Map.entry(List.of(3, 3, 4, 4, 6, 6), 1500),
+      Map.entry(List.of(3, 3, 5, 5, 6, 6), 1500),
       Map.entry(List.of(4, 4, 5, 5, 6, 6), 1500)
   );
 
