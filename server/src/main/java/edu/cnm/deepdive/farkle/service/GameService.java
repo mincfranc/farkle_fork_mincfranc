@@ -224,19 +224,4 @@ public class GameService implements AbstractGameService {
   }
 }
 
-//  private Game setCurrentPlayer() { return CurrentPlayer }
-//  cycle through players via turn order,
 
-
-/*  create turn
-    if (rollAgain = true) {
-      create roll
-      (userChoiceListener)
-      only turn choices from CurrentPlayer are accepted
-
-      set rollAgain to true|false
-
-    } else {
-      end turn
-
-*/
