@@ -49,12 +49,15 @@ public class Game {
   @JsonProperty(access = Access.READ_ONLY)
   private State state;
 
-  @OneToMany(mappedBy = "game", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(mappedBy = "game", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
   @OrderBy("startTime ASC")
   @JsonIgnore
   private final List<Turn> turns = new LinkedList<>();
 
-  @ManyToMany(fetch = FetchType.EAGER, cascade = {})
+  // TODO: 4/2/25 Replace this with a List<GamePlayer> (OneToMany)
+  //  Order the list by creation timestamp of GamePlayer.
+
+  @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.MERGE, CascadeType.DETACH})
   @JoinTable(name = "game_player",
       joinColumns = @JoinColumn(name = "game_id"),
       inverseJoinColumns = @JoinColumn(name = "player_id"),
@@ -98,6 +101,13 @@ public class Game {
 
   public Turn getCurrentTurn(){
     return turns.isEmpty() ? null : turns.getLast();
+  }
+
+  public int getRollCount() {
+    return getTurns()
+        .stream()
+        .mapToInt((turn) -> turn.getRolls().size())
+        .sum();
   }
 
   @PrePersist
