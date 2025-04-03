@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context=".controller.GameFragment">
+
+  <TextView
+    android:id="@+id/player_name"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:text="@string/player_display_name"/>
+
+
+  <TextView
+    android:id="@+id/opponent_name"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:text="@string/opponent_display_name"/>
+
+  <Button
+    android:id="@+id/quit_button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/quit_game_label"/>
+
+</FrameLayout>

@@ -46,6 +46,24 @@
       app:destination="@id/pre_login_fragment"
       app:popUpTo="@id/nav_graph"/>
 
+    <action
+      android:id="@+id/navigate_to_game_fragment"
+      app:destination="@id/game_fragment"
+      app:popUpTo="@id/nav_graph"/>
+
+  </fragment>
+
+  <fragment
+    android:id="@+id/game_fragment"
+    android:name="edu.cnm.deepdive.farkle.controller.LoginFragment"
+    android:label="@string/game_fragment_label"
+    tools:layout="@layout/fragment_login">
+
+    <action
+      android:id="@+id/navigate_to_home_fragment"
+      app:destination="@id/home_fragment"
+      app:popUpTo="@id/nav_graph"/>
+
   </fragment>
 
 </navigation>
