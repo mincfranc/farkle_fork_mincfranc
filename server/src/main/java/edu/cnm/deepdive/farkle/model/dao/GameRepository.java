@@ -17,7 +17,7 @@ public interface GameRepository extends JpaRepository<Game, Long> {
 
   @Query("""
       SELECT g 
-      FROM Game g
+      FROM Game AS g
       JOIN g.players AS p
       WHERE g.state IN :states AND p.user = :player
       """)
@@ -28,9 +28,10 @@ public interface GameRepository extends JpaRepository<Game, Long> {
       SELECT g
       FROM Game AS g
       JOIN g.players AS p
-      WHERE g.externalKey = :externalKey AND p.user = :user
+      JOIN p.user AS u
+      WHERE g.externalKey = :externalKey AND u = :user
       """)
-  Optional<Game> findByExternalKeyAndPlayersContains(UUID externalKey, User user);
+  Optional<Game> findByExternalKeyAndPlayersUserContains(UUID externalKey, User user);
 
   @Query(value = """
       SELECT g.state != :stateName
@@ -49,7 +50,7 @@ public interface GameRepository extends JpaRepository<Game, Long> {
                            GROUP BY r.turn_id) AS r
                           ON r.turn_id = t.turn_id
             WHERE g.external_key = :gameKey
-                  AND gp.player_id = :userId) AS g
+                  AND gp.user_profile_id = :userId) AS g
       """, nativeQuery = true)
   List<Boolean> checkForUpdates(UUID gameKey, long userId, String stateName, int rollCount,
       Pageable pageable);

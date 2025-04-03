@@ -104,15 +104,6 @@ public class GameService implements AbstractGameService {
   public Game startOrJoin(User user) {
     return gameRepository
         .findByPlayersContainsAndStateIn(user, EnumSet.of(State.PRE_GAME, State.IN_PLAY))
-/*
-        .map((game) -> {
-          game.getPlayers()
-              .stream()
-              .map(GamePlayer::getUser)
-              .forEach((u) ->{});
-          return game;
-        })
-*/
         .orElseGet(() -> gameRepository
             .findByState(State.PRE_GAME)
             .map((game) -> {
@@ -204,7 +195,7 @@ public class GameService implements AbstractGameService {
   @Override
   public Game getGame(UUID gameKey, User user) {
     return gameRepository
-        .findByExternalKeyAndPlayersContains(gameKey, user)
+        .findByExternalKeyAndPlayersUserContains(gameKey, user)
         .orElseThrow();
   }
 
@@ -244,7 +235,7 @@ public class GameService implements AbstractGameService {
   private void sendGameStatus(UUID gameKey, User user, DeferredResult<Game> result,
       ScheduledFuture<?>[] futurePolling) {
     Game game = gameRepository
-        .findByExternalKeyAndPlayersContains(gameKey, user)
+        .findByExternalKeyAndPlayersUserContains(gameKey, user)
         .orElseThrow();
     result.setResult(game);
     futurePolling[0].cancel(true);

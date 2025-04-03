@@ -56,12 +56,8 @@ public class Game {
   @JsonIgnore
   private final List<Turn> turns = new LinkedList<>();
 
-  // TOD 4/2/25 Replace this with a List<GamePlayer> (OneToMany)
-  //  Order the list by creation timestamp of GamePlayer.
-
   @OneToMany(mappedBy = "game", fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, orphanRemoval = true)
   @OrderBy("timestamp asc")
-  @JsonIgnore
   private final List<GamePlayer> players = new LinkedList<>();
 
   public long getId() {
@@ -107,10 +103,6 @@ public class Game {
         .sum();
   }
 
-  @JsonProperty(value = "players")
-  public List<User> getUsers() {
-    return players.stream().map(GamePlayer::getUser).toList();
-  }
 
   @PrePersist
   void generateFieldValues() {
