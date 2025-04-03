@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,6 +28,7 @@ import java.util.UUID;
 @SuppressWarnings("JpaDataSourceORMInspection")
 @Entity
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({"key", "state", "winner", "players", "currentTurn", "rollCount"})
 public class Game {
 
   @Id
@@ -54,18 +56,13 @@ public class Game {
   @JsonIgnore
   private final List<Turn> turns = new LinkedList<>();
 
-  // TODO: 4/2/25 Replace this with a List<GamePlayer> (OneToMany)
+  // TOD 4/2/25 Replace this with a List<GamePlayer> (OneToMany)
   //  Order the list by creation timestamp of GamePlayer.
 
-  @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.MERGE, CascadeType.DETACH})
-  @JoinTable(name = "game_player",
-      joinColumns = @JoinColumn(name = "game_id"),
-      inverseJoinColumns = @JoinColumn(name = "player_id"),
-      uniqueConstraints = @UniqueConstraint(columnNames = {"game_id", "player_id"})
-  )
-  @OrderBy("externalKey")
-  @JsonProperty(access = Access.READ_ONLY)
-  private final List<User> players = new LinkedList<>();
+  @OneToMany(mappedBy = "game", fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, orphanRemoval = true)
+  @OrderBy("timestamp asc")
+  @JsonIgnore
+  private final List<GamePlayer> players = new LinkedList<>();
 
   public long getId() {
     return id;
@@ -95,7 +92,7 @@ public class Game {
     return turns;
   }
 
-  public List<User> getPlayers() {
+  public List<GamePlayer> getPlayers() {
     return players;
   }
 
@@ -108,6 +105,11 @@ public class Game {
         .stream()
         .mapToInt((turn) -> turn.getRolls().size())
         .sum();
+  }
+
+  @JsonProperty(value = "players")
+  public List<User> getUsers() {
+    return players.stream().map(GamePlayer::getUser).toList();
   }
 
   @PrePersist

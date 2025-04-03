@@ -3,6 +3,8 @@ package edu.cnm.deepdive.farkle.service;
 import edu.cnm.deepdive.farkle.model.dao.GameRepository;
 import edu.cnm.deepdive.farkle.model.dto.RollAction;
 import edu.cnm.deepdive.farkle.model.entity.Game;
+import edu.cnm.deepdive.farkle.model.entity.GamePlayer;
+import edu.cnm.deepdive.farkle.model.entity.GamePlayerKey;
 import edu.cnm.deepdive.farkle.model.entity.Roll;
 import edu.cnm.deepdive.farkle.model.entity.Roll.Die;
 import edu.cnm.deepdive.farkle.model.entity.State;
@@ -102,19 +104,35 @@ public class GameService implements AbstractGameService {
   public Game startOrJoin(User user) {
     return gameRepository
         .findByPlayersContainsAndStateIn(user, EnumSet.of(State.PRE_GAME, State.IN_PLAY))
+/*
+        .map((game) -> {
+          game.getPlayers()
+              .stream()
+              .map(GamePlayer::getUser)
+              .forEach((u) ->{});
+          return game;
+        })
+*/
         .orElseGet(() -> gameRepository
             .findByState(State.PRE_GAME)
             .map((game) -> {
               game.setState(State.IN_PLAY);
-              List<User> players = game.getPlayers();
-              players.add(user);
+              List<GamePlayer> players = game.getPlayers();
+              GamePlayer player = new GamePlayer();
+              player.setUser(user);
+              player.setGame(game);
+              players.add(player);
               startNewTurn(game, null);
               return gameRepository.save(game);
             })
             .orElseGet(() -> {
               Game game = new Game();
               game.setState(State.PRE_GAME);
-              game.getPlayers().add(user);
+              List<GamePlayer> players = game.getPlayers();
+              GamePlayer player = new GamePlayer();
+              player.setUser(user);
+              player.setGame(game);
+              players.add(player);
               return gameRepository.save(game);
             })
         );
@@ -236,12 +254,16 @@ public class GameService implements AbstractGameService {
   private User startNewTurn(Game game, User currentPlayer) {
     Turn turn = new Turn();
     User nextPlayer;
-    List<User> players = game.getPlayers();
+    List<GamePlayer> players = game.getPlayers();
     if (currentPlayer == null) {
-      nextPlayer = players.getFirst();
+      nextPlayer = players.getFirst().getUser();
     } else {
-      int position = players.indexOf(currentPlayer);
-      nextPlayer = players.get((position + 1) % players.size());
+      int position = players
+          .stream()
+          .map(GamePlayer::getUser)
+          .toList()
+          .indexOf(currentPlayer);
+      nextPlayer = players.get((position + 1) % players.size()).getUser();
     }
     turn.setUser(nextPlayer);
     turn.setGame(game);

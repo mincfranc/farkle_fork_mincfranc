@@ -7,7 +7,7 @@ import java.util.Objects;
 
 @SuppressWarnings("JpaDataSourceORMInspection")
 @Embeddable
-class GamePlayerKey implements Serializable {
+public class GamePlayerKey implements Serializable {
 
   @Column(name = "game_id")
   private long gameId;

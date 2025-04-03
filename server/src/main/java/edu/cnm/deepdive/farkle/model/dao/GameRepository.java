@@ -15,8 +15,21 @@ public interface GameRepository extends JpaRepository<Game, Long> {
 
 //  List<Game> findByUser(User user);
 
+  @Query("""
+      SELECT g 
+      FROM Game g
+      JOIN g.players AS p
+      WHERE g.state IN :states AND p.user = :player
+      """)
   Optional<Game> findByPlayersContainsAndStateIn(User player, Set<State> states);
 
+
+  @Query("""
+      SELECT g
+      FROM Game AS g
+      JOIN g.players AS p
+      WHERE g.externalKey = :externalKey AND p.user = :user
+      """)
   Optional<Game> findByExternalKeyAndPlayersContains(UUID externalKey, User user);
 
   @Query(value = """
@@ -38,7 +51,8 @@ public interface GameRepository extends JpaRepository<Game, Long> {
             WHERE g.external_key = :gameKey
                   AND gp.player_id = :userId) AS g
       """, nativeQuery = true)
-  List<Boolean> checkForUpdates(UUID gameKey, long userId, String stateName, int rollCount, Pageable pageable);
+  List<Boolean> checkForUpdates(UUID gameKey, long userId, String stateName, int rollCount,
+      Pageable pageable);
 
   Optional<Game> findByState(State state);
 
