@@ -49,6 +49,8 @@ public class GamePlayer {
   @JsonProperty(access = Access.READ_ONLY)
   private User user;
 
+  // TODO: 4/4/25 Add transient fields for lastRoll and Current score only completed turns
+  
   public long getId() {
     return id;
   }

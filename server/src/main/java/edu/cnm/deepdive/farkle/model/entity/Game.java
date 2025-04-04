@@ -28,7 +28,7 @@ import java.util.UUID;
 @SuppressWarnings("JpaDataSourceORMInspection")
 @Entity
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({"key", "state", "winner", "players", "currentTurn", "rollCount"})
+@JsonPropertyOrder({"key", "state", "rollCount", "winner", "players", "currentTurn"})
 public class Game {
 
   @Id
