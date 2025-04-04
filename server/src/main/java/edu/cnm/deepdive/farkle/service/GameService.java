@@ -104,7 +104,6 @@ public class GameService implements AbstractGameService {
   public Game startOrJoin(User user) {
     return gameRepository
         .findByPlayersContainsAndStateIn(user, EnumSet.of(State.PRE_GAME, State.IN_PLAY))
-        .map(this::addTransients)
         .orElseGet(() -> gameRepository
             .findByState(State.PRE_GAME)
             .map((game) -> {
@@ -117,7 +116,6 @@ public class GameService implements AbstractGameService {
               startNewTurn(game, null);
               return gameRepository.save(game);
             })
-            .map(this::addTransients)
             .orElseGet(() -> {
               Game game = new Game();
               game.setState(State.PRE_GAME);
@@ -126,7 +124,7 @@ public class GameService implements AbstractGameService {
               player.setUser(user);
               player.setGame(game);
               players.add(player);
-              return addTransients(gameRepository.save(game));
+              return gameRepository.save(game);
             })
         );
   }
@@ -172,6 +170,7 @@ public class GameService implements AbstractGameService {
           if (currentRoll.isFarkle()
               || dice.isEmpty()
               || action.isFinished()) { // FIXME: 3/24/2025 add conditions to verify allowed to end turn
+            currentTurn.setFinished(true);
             startNewTurn(game, user);
             nextRoll = game.getCurrentTurn().getCurrentRoll();
           } else {
@@ -199,7 +198,6 @@ public class GameService implements AbstractGameService {
   public Game getGame(UUID gameKey, User user) {
     return gameRepository
         .findByExternalKeyAndPlayersUserContains(gameKey, user)
-        .map(this::addTransients)
         .orElseThrow();
   }
 
@@ -240,7 +238,6 @@ public class GameService implements AbstractGameService {
       ScheduledFuture<?>[] futurePolling) {
     Game game = gameRepository
         .findByExternalKeyAndPlayersUserContains(gameKey, user)
-        .map(this::addTransients)
         .orElseThrow();
     result.setResult(game);
     futurePolling[0].cancel(true);
@@ -285,11 +282,6 @@ public class GameService implements AbstractGameService {
     roll.getDice().addAll(dice);
     // TODO: 3/24/25 Check if the dice just rolled is a farkle
     return roll;
-  }
-
-  private Game addTransients (Game game) {
-    // TODO: 4/4/25 Set transient values in the GamePlayers contained in Game
-    return game;
   }
 
 }

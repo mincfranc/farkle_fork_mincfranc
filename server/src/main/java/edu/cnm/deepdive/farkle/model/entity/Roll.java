@@ -24,7 +24,7 @@ import java.util.List;
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
-@JsonPropertyOrder({"rollScore", "farkle", "numberDice", "dice", "rolledAt"})
+@JsonPropertyOrder({"rollScore", "farkle", "rolledAt", "numberDice", "dice"})
 public class Roll {
 
   @Id

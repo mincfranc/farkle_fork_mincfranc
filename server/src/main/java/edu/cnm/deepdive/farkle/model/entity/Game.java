@@ -21,6 +21,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OrderBy;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.UniqueConstraint;
+import java.time.Instant;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
@@ -28,7 +29,7 @@ import java.util.UUID;
 @SuppressWarnings("JpaDataSourceORMInspection")
 @Entity
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({"key", "state", "rollCount", "winner", "players", "currentTurn"})
+@JsonPropertyOrder({"key", "createdAt", "state", "startedAt", "rollCount", "winner", "players", "currentTurn"})
 public class Game {
 
   @Id
@@ -103,6 +104,13 @@ public class Game {
         .sum();
   }
 
+  public Instant getStartedAt() {
+    return turns.isEmpty() ? null : turns.getFirst().getStartedAt();
+  }
+
+  public Instant getCreatedAt() {
+    return players.getFirst().getJoinedAt();
+  }
 
   @PrePersist
   void generateFieldValues() {

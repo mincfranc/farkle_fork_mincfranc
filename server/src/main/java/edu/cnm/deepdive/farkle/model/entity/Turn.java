@@ -25,7 +25,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 @SuppressWarnings("JpaDataSourceORMInspection")
 @Entity
-@JsonPropertyOrder({"key", "startedAt", "finished", "user", "rolls"})
+@JsonPropertyOrder({"key", "startedAt", "finished", "farkle", "score", "user", "rolls"})
 public class Turn {
 
   @Id
@@ -47,8 +47,7 @@ public class Turn {
   @JoinColumn(name = "user_id", nullable = false, updatable = false)
   @ManyToOne(fetch = FetchType.EAGER, optional = false)
   private User user;
-  // TODO: 3/20/25 Add player who took turn
-  // TODO: 3/20/25 Consider adding timestamp
+  // TODO: 4/4/25 Exclude this field when looking at last turn for each user
 
   @Column(nullable = false)
   @JsonProperty(access = Access.READ_ONLY)
@@ -112,7 +111,7 @@ public class Turn {
     return rolls.isEmpty() ? null : rolls.getLast();
   }
 
-  public int getTurnScore() {
+  public int getScore() {
     return rolls
         .stream()
         .mapToInt(Roll::getRollScore)

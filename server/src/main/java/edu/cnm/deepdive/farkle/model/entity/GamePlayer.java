@@ -24,7 +24,7 @@ import org.hibernate.annotations.CreationTimestamp;
 @Table(
     uniqueConstraints = @UniqueConstraint(columnNames = {"game_id", "user_profile_id"})
 )
-@JsonPropertyOrder({"joinedAt", "user"})
+@JsonPropertyOrder({"joinedAt", "score", "user", "lastTurn"})
 public class GamePlayer {
 
   @Id
@@ -73,6 +73,25 @@ public class GamePlayer {
 
   public void setUser(User user) {
     this.user = user;
+  }
+
+  public Turn getLastTurn(){
+    return game
+        .getTurns()
+        .stream()
+        .filter((turn) -> turn.getUser().equals(user))
+        .reduce((turn1, turn2) -> turn2)
+        .orElse(null);
+  }
+
+  public int getScore() {
+    return game
+        .getTurns()
+        .stream()
+        .filter((turn) -> turn.getUser().equals(user))
+        .filter(Turn::isFinished)
+        .mapToInt(Turn::getScore)
+        .sum();
   }
 
 }
