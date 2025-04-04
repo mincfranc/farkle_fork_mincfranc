@@ -25,7 +25,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 @SuppressWarnings("JpaDataSourceORMInspection")
 @Entity
-@JsonPropertyOrder({"key", "startTime", "finished", "user", "rolls"})
+@JsonPropertyOrder({"key", "startedAt", "finished", "user", "rolls"})
 public class Turn {
 
   @Id
@@ -42,10 +42,10 @@ public class Turn {
   @JsonProperty(access = Access.READ_ONLY)
   @CreationTimestamp
   @Temporal(TemporalType.TIMESTAMP)
-  private Instant startTime;
+  private Instant startedAt;
 
   @JoinColumn(name = "user_id", nullable = false, updatable = false)
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @ManyToOne(fetch = FetchType.EAGER, optional = false)
   private User user;
   // TODO: 3/20/25 Add player who took turn
   // TODO: 3/20/25 Consider adding timestamp
@@ -55,7 +55,7 @@ public class Turn {
   private boolean finished;
 
   @OneToMany(mappedBy = "turn", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-  @OrderBy("timestamp ASC")
+  @OrderBy("rolledAt ASC")
   @JsonIgnore
   private final List<Roll> rolls = new LinkedList<>();
 
@@ -96,8 +96,8 @@ public class Turn {
     this.user = user;
   }
 
-  public Instant getStartTime() {
-    return startTime;
+  public Instant getStartedAt() {
+    return startedAt;
   }
 
   public Game getGame() {

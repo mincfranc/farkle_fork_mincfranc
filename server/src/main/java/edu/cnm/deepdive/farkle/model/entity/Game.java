@@ -42,7 +42,7 @@ public class Game {
   private UUID externalKey;
 
   @ManyToOne(fetch = FetchType.EAGER, optional = true)
-  @JoinColumn(name = "winner_id", nullable = true, insertable = false, updatable = false)
+  @JoinColumn(name = "winner_id", nullable = true, updatable = true)
   @JsonProperty(access = Access.READ_ONLY)
   private User winner;
 
@@ -52,12 +52,12 @@ public class Game {
   private State state;
 
   @OneToMany(mappedBy = "game", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-  @OrderBy("startTime ASC")
+  @OrderBy("startedAt ASC")
   @JsonIgnore
   private final List<Turn> turns = new LinkedList<>();
 
   @OneToMany(mappedBy = "game", fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, orphanRemoval = true)
-  @OrderBy("timestamp asc")
+  @OrderBy("joinedAt ASC")
   private final List<GamePlayer> players = new LinkedList<>();
 
   public long getId() {
